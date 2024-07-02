@@ -63,9 +63,8 @@ public class MysqlConfig {
 	SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
 		http.csrf(csrf->csrf.disable());
 		return http.build();
-<<<<<<< HEAD
+
 	}
-=======
->>>>>>> 1107a3d5e24806a3e4b7ce93e7fa6a434dba15ac
+
 	
 }
