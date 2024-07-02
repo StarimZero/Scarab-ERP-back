@@ -20,7 +20,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
-public class MysqlConfig {
+public class MysqlConfig {	
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource.hikari")
 	HikariConfig hikariConfig() {
@@ -38,7 +38,7 @@ public class MysqlConfig {
 	SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactory=new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		Resource[] resources=new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*Mapper.xml");
+		Resource[] resources=new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*/*Mapper.xml");
 		sessionFactory.setMapperLocations(resources);
 		return sessionFactory.getObject();
 	}
@@ -63,6 +63,5 @@ public class MysqlConfig {
 	SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
 		http.csrf(csrf->csrf.disable());
 		return http.build();
-	}
 	
 }
