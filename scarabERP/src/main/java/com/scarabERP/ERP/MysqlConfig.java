@@ -53,6 +53,7 @@ public class MysqlConfig {
        return new DataSourceTransactionManager(dataSource);
     }
 	
+
 	@Bean
 	PasswordEncoder endcoder() {
 		return new BCryptPasswordEncoder();
@@ -62,6 +63,5 @@ public class MysqlConfig {
 	SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
 		http.csrf(csrf->csrf.disable());
 		return http.build();
-	}	
 	
 }
