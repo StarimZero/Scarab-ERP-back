@@ -10,6 +10,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -49,6 +53,16 @@ public class MysqlConfig {
        return new DataSourceTransactionManager(dataSource);
     }
 	
+
+	@Bean
+	PasswordEncoder endcoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
+		http.csrf(csrf->csrf.disable());
+		return http.build();
+	}
 	
 }
