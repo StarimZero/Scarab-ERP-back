@@ -10,13 +10,17 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
-public class MysqlConfig {
+public class MysqlConfig {	
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource.hikari")
 	HikariConfig hikariConfig() {
@@ -34,7 +38,7 @@ public class MysqlConfig {
 	SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactory=new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		Resource[] resources=new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*Mapper.xml");
+		Resource[] resources=new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*/*Mapper.xml");
 		sessionFactory.setMapperLocations(resources);
 		return sessionFactory.getObject();
 	}
@@ -49,6 +53,15 @@ public class MysqlConfig {
        return new DataSourceTransactionManager(dataSource);
     }
 	
+	@Bean
+	PasswordEncoder endcoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
+		http.csrf(csrf->csrf.disable());
+		return http.build();
+	}	
 	
 }
