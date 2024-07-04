@@ -10,7 +10,7 @@ public class MysqlDAOImpl implements MysqlDAO {
 	
 	@Autowired
 	SqlSession session;
-	String namespace = "com.example.mapper.GraphMapper";
+	String namespace = "com.scarabERP.ERP.mapper.GraphMapper";
 	
 	
 	@Override

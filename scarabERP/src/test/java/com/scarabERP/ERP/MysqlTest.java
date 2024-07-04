@@ -5,17 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-
-
 @SpringBootTest
 public class MysqlTest {
 	
-@Autowired
-MysqlDAO dao;
-
-@Test
-public void test() {
-	dao.now();
-}
 	
+	@Autowired
+	MysqlDAO dao;
+	
+	
+	@Test
+	public void test() {
+		dao.now();
+	}
 }
