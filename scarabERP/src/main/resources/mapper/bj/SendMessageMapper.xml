@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SenderMapper">
+		
+		<select id="listSendMessage" resultType="com.scarabERP.ERP.bj.message.SendMessageVO">
+			select * from erp_send_message 
+			where send_message_sender = #{send_message_sender};
+		</select>
+		
+	 <insert id="insertSendMessage">
+	 	insert into erp_send_message (send_message_sender, send_message_receiver, send_Message_content, send_Message_senddate
+	 	send_message_state)
+	 	values(#{send_message_sender}, #{send_message_receiver}, #{send_Message_content}, #{send_Message_senddate})
+	 </insert>
+	 
+	 
+	 <select id="readSendMessage" resultType="com.scarabERP.ERP.bj.message.SendMessageVO">
+		select * from 
+		erp_send_message
+		where send_message_id=#{send_message_id};
+	 </select>
+	
+	
+	<update id="updateSendMessageState">
+		update erp_send_message
+		set send_message_state=1
+		where send_message_id=#{send_message_id};
+	</update>
+    
+    
+  	<delete id="deleteSendMessage" >
+		 delete from erp_send_message 
+		 where send_message_state=1 and send_message_id=#{send_message_id};
+	</delete>
+    
+</mapper>
