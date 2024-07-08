@@ -4,7 +4,7 @@ public class ItemsVO {
 	private String items_id;
 	private String items_name;
 	private String items_photo;
-	private int items_tpye;
+	private int items_type;
 	public String getItems_id() {
 		return items_id;
 	}
@@ -23,16 +23,16 @@ public class ItemsVO {
 	public void setItems_photo(String items_photo) {
 		this.items_photo = items_photo;
 	}
-	public int getItems_tpye() {
-		return items_tpye;
+	public int getItems_type() {
+		return items_type;
 	}
-	public void setItems_tpye(int items_tpye) {
-		this.items_tpye = items_tpye;
+	public void setItems_type(int items_type) {
+		this.items_type = items_type;
 	}
 	@Override
 	public String toString() {
 		return "ItemsVO [items_id=" + items_id + ", items_name=" + items_name + ", items_photo=" + items_photo
-				+ ", items_tpye=" + items_tpye + "]";
+				+ ", items_type=" + items_type + "]";
 	}
 	
 	

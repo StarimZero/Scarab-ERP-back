@@ -21,4 +21,39 @@ public class ItemsDAOImply implements ItemsDAO {
 		return session.selectList(namespace + ".list", vo);
 	}
 
+
+	@Override
+	public void insert(ItemsVO vo) {
+		session.insert(namespace + ".insert", vo);
+		
+	}
+
+
+	@Override
+	public ItemsVO read(String items_id) {
+		return session.selectOne(namespace + ".read", items_id);
+	}
+
+
+	@Override
+	public void update(ItemsVO vo) {
+		session.update(namespace + ".update", vo);
+		
+	}
+
+
+	@Override
+	public void updatePhoto(ItemsVO vo) {
+		session.update(namespace + ".updatePhoto", vo);
+		
+	}
+
+
+	@Override
+	public void delete(String items_id) {
+		session.delete(namespace + ".delete", items_id);
+		
+		
+	}
+
 }
