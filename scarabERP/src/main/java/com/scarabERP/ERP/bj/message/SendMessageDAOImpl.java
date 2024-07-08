@@ -6,38 +6,37 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class SendMessageDAOImpl implements SendMessageDAO{
 	@Autowired
 	SqlSession session;
-	String  namespace="com.example.mapper.VisitorMapper";
+	String namespace="com.scarabERP.ERP.bj.message.SendMessageVO";
 	
 	
 	@Override
-	public void insertSendMessage(SendMessageVO vo) {
-		session.insert(namespace + ".insertSendMessage", vo);
+	public void insert(SendMessageVO vo) {
+		session.insert(namespace + ".insert", vo);
+		
 	}
 	
+
 	@Override
-	public SendMessageVO readSendMessage(int send_message_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<SendMessageVO> listSendMessage(String send_message_sender) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(int receive_message_id) {
+		session.delete(namespace + ".delete", receive_message_id);
+		
 	}
 
 	@Override
-	public List<SendMessageVO> listSendMessageState(int send_message_state) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateSendMessageState(SendMessageVO vo) {
+		session.update(namespace + ".updateSendMessageState", vo);
+		
+		  
 	}
 
 	@Override
-	public void deleteReceiveMessage(int receive_message_id) {
-		// TODO Auto-generated method stub
+	public List<SendMessageVO> list(String send_message_sender) {
+		return session.selectList(namespace + ".list", send_message_sender);
 		
 	}
 

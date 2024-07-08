@@ -3,10 +3,10 @@ package com.scarabERP.ERP.bj.message;
 import java.util.List;
 
 public interface SendMessageDAO {
-	public void insertSendMessage(SendMessageVO vo);
-	public SendMessageVO readSendMessage(int send_message_id);
-	public List<SendMessageVO> listSendMessage(String send_message_sender);
-	public List<SendMessageVO> listSendMessageState(int send_message_state);
-	public void deleteReceiveMessage(int receive_message_id);
+	public void insert(SendMessageVO vo);
+	public List<SendMessageVO> list(String send_message_sender);
+	public void updateSendMessageState(SendMessageVO vo);
+	public void delete(int receive_message_id);
+
 
 }
