@@ -29,6 +29,7 @@ public class VisitorController {
 		//아이디 맞고 비번 틀림 (2 리턴)
 		//아이디 맞고 비번도 맞음 (1 리턴 - 로그인성공)
 		int result=0;
+
 		VisitorVO visitor = dao.login(vo.getVisitor_id());
 		if(visitor != null){
 			//암호화된 비번 비교
@@ -48,6 +49,7 @@ public class VisitorController {
 	@PostMapping("/insert")
 	public void insert(@RequestBody VisitorVO vo) {
 		//비밀번호 암호화
+
 		String vpass = encoder.encode(vo.getVisitor_pass());
 		vo.setVisitor_pass(vpass);
 		dao.insert(vo);
