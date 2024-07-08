@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/visitor")
+@RequestMapping("/web/visitor")
 public class VisitorController {
 	@Autowired
 	VisitorDAO dao;
@@ -18,9 +18,9 @@ public class VisitorController {
 	@Autowired
 	PasswordEncoder encoder;
 	
-	@GetMapping("/read/{vid}")
-	public VisitorVO read(@PathVariable("vid") String vid) {
-		return dao.read(vid);
+	@GetMapping("/check/{visitor_id}")
+	public VisitorVO check(@PathVariable("visitor_id") String visitor_id) {
+		return dao.check(visitor_id);
 	}
 	
 	@PostMapping("/login")
@@ -29,23 +29,40 @@ public class VisitorController {
 		//아이디 맞고 비번 틀림 (2 리턴)
 		//아이디 맞고 비번도 맞음 (1 리턴 - 로그인성공)
 		int result=0;
-		VisitorVO visitor = dao.read(vo.getVid());
+
+		VisitorVO visitor = dao.login(vo.getVisitor_id());
 		if(visitor != null){
 			//암호화된 비번 비교
-			if(encoder.matches(vo.getVpass(), visitor.getVpass())){
+			if(encoder.matches(vo.getVisitor_pass(), visitor.getVisitor_pass())){
+			
+			//비암호화 비번 비교
+			//if(vo.getVisitor_pass().equals(visitor.getVisitor_pass())) {
 				result=1;
 			}else{
 				result=2;
 			}
 		}
+		System.out.println(visitor);
 		return result;
 	}
 	
 	@PostMapping("/insert")
 	public void insert(@RequestBody VisitorVO vo) {
 		//비밀번호 암호화
-		String vpass = encoder.encode(vo.getVpass());
-		vo.setVpass(vpass);
+
+		String vpass = encoder.encode(vo.getVisitor_pass());
+		vo.setVisitor_pass(vpass);
 		dao.insert(vo);
+				
+	}
+	
+	@GetMapping("/mypage/{visitor_id}")
+	public VisitorVO mypage(@PathVariable("visitor_id") String visitor_id) {
+		return dao.mypage(visitor_id);
+	}
+	
+	@PostMapping("/update")
+	public void update(@RequestBody VisitorVO vo) {
+		dao.update(vo);
 	}
 }
