@@ -17,12 +17,11 @@ public class SendMessageController {
 	@Autowired
 	SendMessageDAO dao;
 	
-	@Autowired
-	ReceiveMessageService service;
+
 	
 	@PostMapping("/insert")
 	public void insert(@RequestBody MessageVO vo) {
-		service.insert(vo);
+		dao.insert(vo);
 		
 	}
 	
@@ -42,4 +41,9 @@ public class SendMessageController {
 		dao.updateSendState(vo);
 	}
 	
+	@GetMapping("/read/{message_id}")
+	public MessageVO readSend(@PathVariable("message_id")int message_id) {
+		return dao.readSend(message_id);
+	}
+		
 }

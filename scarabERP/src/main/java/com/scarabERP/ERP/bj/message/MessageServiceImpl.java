@@ -4,13 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReceiveMessageServiceImpl implements ReceiveMessageService{
+public class MessageServiceImpl implements MessageService{
+
 	@Autowired
 	ReceiveMessageDAO rdao;
 	
 	@Autowired
 	SendMessageDAO sdao;
-	
+
 	@Override
 	public void insert(MessageVO vo) {
 		rdao.insert(vo);
@@ -18,7 +19,5 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService{
 		
 	}
 	
-	
-
 	
 }

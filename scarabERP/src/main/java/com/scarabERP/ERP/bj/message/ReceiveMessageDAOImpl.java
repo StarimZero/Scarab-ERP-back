@@ -46,6 +46,12 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 	}
 
 
+	@Override
+	public MessageVO readReceive(int message_id) {
+		return session.selectOne(namespace + ".readReceive", message_id);
+	}
+
+
 
 
 }

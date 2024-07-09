@@ -1,5 +1,5 @@
 package com.scarabERP.ERP.bj.message;
 
-public interface ReceiveMessageService {
+public interface MessageService {
 	public void insert(MessageVO vo);
 }
