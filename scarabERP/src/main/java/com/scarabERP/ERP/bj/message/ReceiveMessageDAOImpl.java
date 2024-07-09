@@ -12,37 +12,40 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 
 	@Autowired
 	SqlSession session;
-	String namespace="com.scarabERP.ERP.bj.message.ReceiveMessageVO";
+	String namespace="com.example.mapper.bj.ReceiveMessageMapper";
 	
 	@Override
-	public void insert(ReceiveMessageVO vo) {
+	public void insert(MessageVO vo) {
 		session.insert(namespace + ".insert", vo);
 		
 	}
 
 
 	@Override
-	public void updateReceiveMessageState(ReceiveMessageVO vo) {
-		session.update(namespace + ".updateReceiveMessageState", vo);
+	public void updateReceiveState(MessageVO vo) {
+		session.update(namespace + ".updateReceiveState", vo);
 		
 	}
 
 	@Override
-	public void delete(int send_message_id) {
-		session.delete(namespace + ".delete", send_message_id);
+	public void delete(int message_id) {
+		session.delete(namespace + ".delete", message_id);
 		
 	}
 
 	@Override
-	public List<ReceiveMessageVO> list(String receive_message_receiver) {
-		return session.selectList(namespace + ".list", receive_message_receiver);
+	public List<MessageVO> list(String message_receiver) {
+		return session.selectList(namespace + ".list", message_receiver);
 	}
 
 
 	@Override
-	public void updateReadDate(int send_message_id) {
+	public void updateReadDate(int message_id) {
 		
-		session.update(namespace + ".updateReadDate", send_message_id);
+		session.update(namespace + ".updateReadDate", message_id);
 	}
+
+
+
 
 }

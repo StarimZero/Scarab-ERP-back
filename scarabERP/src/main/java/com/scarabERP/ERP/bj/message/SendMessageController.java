@@ -17,27 +17,29 @@ public class SendMessageController {
 	@Autowired
 	SendMessageDAO dao;
 	
+	@Autowired
+	ReceiveMessageService service;
 	
 	@PostMapping("/insert")
-	public void insert(@RequestBody SendMessageVO vo) {
-		dao.insert(vo);
+	public void insert(@RequestBody MessageVO vo) {
+		service.insert(vo);
 		
 	}
 	
-	@GetMapping("/list/{send_message_sender}") // erp/sendmessage/list/kiin
-	public List<SendMessageVO> list(@PathVariable("send_message_sender") String send_message_sender) {
-		return dao.list(send_message_sender);
+	@GetMapping("/list/{message_sender}") // erp/sendmessage/list/kiin
+	public List<MessageVO> list(@PathVariable("message_sender") String message_sender) {
+		return dao.list(message_sender);
 	}
 	
 	
-	@PostMapping("/delete/{send_message_id}")
-	public void delete(@PathVariable("send_message_id") int send_message_id) {
-		dao.delete(send_message_id);
+	@PostMapping("/delete/{message_id}")
+	public void delete(@PathVariable("message_id") int message_id) {
+		dao.delete(message_id);
 	}
 	
-	@PostMapping("/update/sendmessage/state")
-	public void updateSendMessageState(@RequestBody SendMessageVO vo) {
-		dao.updateSendMessageState(vo);
+	@PostMapping("/update/send/state")
+	public void updateSendState(@RequestBody MessageVO vo) {
+		dao.updateSendState(vo);
 	}
 	
 }

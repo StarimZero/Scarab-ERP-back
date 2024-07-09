@@ -11,32 +11,32 @@ import org.springframework.stereotype.Repository;
 public class SendMessageDAOImpl implements SendMessageDAO{
 	@Autowired
 	SqlSession session;
-	String namespace="com.scarabERP.ERP.bj.message.SendMessageVO";
+	String namespace="com.example.mapper.bj.SendMessageMapper";
 	
 	
 	@Override
-	public void insert(SendMessageVO vo) {
+	public void insert(MessageVO vo) {
 		session.insert(namespace + ".insert", vo);
 		
 	}
 	
 
 	@Override
-	public void delete(int receive_message_id) {
-		session.delete(namespace + ".delete", receive_message_id);
+	public void delete(int message_id) {
+		session.delete(namespace + ".delete", message_id);
 		
 	}
 
 	@Override
-	public void updateSendMessageState(SendMessageVO vo) {
-		session.update(namespace + ".updateSendMessageState", vo);
+	public void updateSendState(MessageVO vo) {
+		session.update(namespace + ".updateSendState", vo);
 		
 		  
 	}
 
 	@Override
-	public List<SendMessageVO> list(String send_message_sender) {
-		return session.selectList(namespace + ".list", send_message_sender);
+	public List<MessageVO> list(String message_sender) {
+		return session.selectList(namespace + ".list", message_sender);
 		
 	}
 

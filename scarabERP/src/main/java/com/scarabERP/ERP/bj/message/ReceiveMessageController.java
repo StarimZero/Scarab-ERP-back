@@ -18,26 +18,29 @@ public class ReceiveMessageController {
 	@Autowired
 	ReceiveMessageDAO dao;
 	
+	@Autowired
+	ReceiveMessageService service;
+	
 	@PostMapping("/insert")
-	public void insert(@RequestBody ReceiveMessageVO vo) {
-		dao.insert(vo);
+	public void insert(@RequestBody MessageVO vo) {
+		service.insert(vo);
 		
 	}
 	
-	@GetMapping("/list/{receive_message_receiver}") // erp/receivemessage/list
-	public List<ReceiveMessageVO> list(@PathVariable("receive_message_receiver") String receive_message_receiver) {
-		return dao.list(receive_message_receiver);
+	@GetMapping("/list/{message_receiver}") // erp/receivemessage/list
+	public List<MessageVO> list(@PathVariable("message_receiver") String message_receiver) {
+		return dao.list(message_receiver);
 	}
     
 	
-	@PostMapping("/delete/{receive_message_id}")
-	public void delete(@PathVariable("receive_message_id") int receive_message_id) {
-		dao.delete(receive_message_id);
+	@PostMapping("/delete/{message_id}")
+	public void delete(@PathVariable("message_id") int message_id) {
+		dao.delete(message_id);
 	}
 	
-	@PostMapping("/update/receivemessage/state")
-	public void updateReceiveMessageState(@RequestBody ReceiveMessageVO vo) {
-		dao.updateReceiveMessageState(vo);
+	@PostMapping("/update/receive/state")
+	public void updateReceiveState(@RequestBody MessageVO vo) {
+		dao.updateReceiveState(vo);
 	}
 	
 
