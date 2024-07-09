@@ -11,3 +11,4 @@ public interface ReceiveMessageDAO {
 	public void updateReadDate(int message_id);
 	
 }
+
