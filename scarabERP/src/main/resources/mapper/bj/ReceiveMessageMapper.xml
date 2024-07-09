@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scarabERP.ERP.bj.message.ReceiveMessageVO">
+<mapper namespace="com.example.mapper.bj.ReceiveMessageMapper">
 
-	<select id="list" resultType="com.scarabERP.ERP.bj.message.ReceiveMessageVO">
+	<select id="list" resultType="com.scarabERP.ERP.bj.message.MessageVO">
 			select * from erp_receive_message 
-			where receive_message_receiver = #{receive_message_receiver};
+			where message_receiver = #{message_receiver};
 	</select>
+	
+	
 		
 	 <insert id="insert">
-	 	insert into erp_receive_message (receive_message_sender, receive_message_receiver, receive_message_content, receive_message_senddate,
-	 	receive_message_state)
-	 	values(#{receive_message_sender}, #{receive_message_receiver}, #{receive_message_content}, #{receive_message_senddate}, #{receive_message_state});
+	 	insert into erp_receive_message (message_sender, message_receiver, message_content)
+	 	values(#{message_sender}, #{message_receiver}, #{message_content});
 	 </insert>
-	 
-	 
-	 <select id="readReceive" resultType="com.scarabERP.ERP.bj.message.ReceiveMessageVO">
-		select  m.* , u.member_info_id 
-		from erp_receive_message m, erp_member_info u
-		where receive_message_id=#{receive_message_id};
-	 </select>
 	
 	
-	<update id="updateReceiveMessageState">
+	<update id="updateReceiveState">
 		update erp_receive_message
-		set receive_message_state=1
-		where receive_message_id=#{receive_message_id};
+		set message_state=1
+		where message_id=#{message_id};
 	</update>
     
     
   	<delete id="delete" >
 		 delete from erp_receive_message 
-		 where receive_message_state=1 and receive_message_id=#{receive_message_id};
+		 where message_state=1 and message_id=#{message_id};
 	</delete>
 	
 	<update id="updateReadDate">
 		update erp_receive_message
-		set receive_message_readdate=now()
-		where receive_message_id=#{receive_message_id}
+		set message_readdate=now()
+		where message_id=#{message_id};
 	</update>
 </mapper>
