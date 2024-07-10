@@ -13,4 +13,7 @@
 	 <delete id="delete">
 	 	delete from erp_sales where sales_id = #{sales_id}
 	 </delete>
+	 <update id="update">
+		update erp_sales set sales_date=#{sales_date}, sales_warehouse=#{sales_warehouse}, sales_price=#{sales_price}, sales_qnt=#{sales_qnt}, sales_employee=#{sales_employee}, sales_location=#{sales_location} where sales_id = #{sales_id}
+	</update>
 </mapper>
