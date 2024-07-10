@@ -39,9 +39,9 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public MemberVO read(String member_info_key) {
+	public MemberVO read(String member_info_id) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".read", member_info_key);
+		return session.selectOne(namespace + ".read", member_info_id);
 	}
 
 	@Override

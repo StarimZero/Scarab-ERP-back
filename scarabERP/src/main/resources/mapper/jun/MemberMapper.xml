@@ -51,7 +51,7 @@
 		SELECT m.*, d.dept_name
 		FROM erp_member_info m
 		INNER JOIN erp_dept d ON m.dept_key = d.dept_key
-		WHERE member_info_key = #{member_info_key}
+		WHERE member_info_id = #{member_info_id}
 	</select>
 	
 	<update id="update_info">
