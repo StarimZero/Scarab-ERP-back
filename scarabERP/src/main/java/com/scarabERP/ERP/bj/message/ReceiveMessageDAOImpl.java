@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
 public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 
@@ -33,16 +34,18 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 		
 	}
 
+
 	@Override
 	public List<MessageVO> list(String message_receiver) {
 		return session.selectList(namespace + ".list", message_receiver);
 	}
 
 
+
 	@Override
-	public void updateReadDate(int message_id) {
+	public void updateReadDate(MessageVO vo) {
 		
-		session.update(namespace + ".updateReadDate", message_id);
+		session.update(namespace + ".updateReadDate", vo);
 	}
 
 
