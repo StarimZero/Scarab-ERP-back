@@ -1,6 +1,7 @@
 package com.scarabERP.ERP.han.visitor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,17 +75,19 @@ public class VisitorController {
 	
 	@DeleteMapping("/delete/{visitor_id}")
 	public void delete(@PathVariable("visitor_id") String visitor_id) {
-		System.out.println("삭제전");
 		dao.delete(visitor_id);
-		System.out.println("삭제후");
 	}
 	
 
 	@Autowired
 	private VisitorService visitorService;
 	@PostMapping("/searchid")
-	public String searchid(@RequestParam String visitor_email) {		
-		visitorService.searchid(visitor_email);
-		return "아이디 있으면 이메일로 보내줌";
+    public ResponseEntity<String> searchid(@RequestBody VisitorEmailRequest request) {		
+        visitorService.searchid(request.getVisitor_email());
+        return ResponseEntity.ok("입력한 이메일로 아이디가 전송되었습니다.");
 	}
+
+	
+
+	
 }
