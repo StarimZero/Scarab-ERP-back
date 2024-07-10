@@ -2,8 +2,6 @@ package com.scarabERP.ERP.han.visitor;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class VisitorVO {
 	private String visitor_id;
 	private String visitor_pass;

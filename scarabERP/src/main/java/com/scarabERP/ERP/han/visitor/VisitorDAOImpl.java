@@ -35,5 +35,15 @@ public class VisitorDAOImpl implements VisitorDAO{
 		session.update(namespace + ".update", vo);
 	}
 
+	@Override
+	public void delete(String visitor_id) {
+		session.delete(namespace + ".delete", visitor_id);
+	}
+
+	@Override
+	public VisitorVO searchid(String visitor_email) {
+		return session.selectOne(namespace + ".searchid", visitor_email);
+	}
+
 	
 }
