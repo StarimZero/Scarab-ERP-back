@@ -8,8 +8,8 @@
 		</select>
 		
 	 <insert id="insert">
-	 	insert into erp_send_message(message_sender, message_receiver, message_content)
-	 	values(#{message_sender}, #{message_receiver}, #{message_content});
+	 	insert into erp_send_message(message_sender, message_receiver, message_content, message_title)
+	 	values(#{message_sender}, #{message_receiver}, #{message_content}, #{message_title});
 	 </insert>
 	 
 	 
@@ -25,5 +25,11 @@
 		 delete from erp_send_message 
 		 where message_state=1 and message_id=#{message_id};
 	</delete>
+	
+	<select id="readSend" resultType="com.scarabERP.ERP.bj.message.MessageVO">
+		select m.* ,u.member_info_id
+		from erp_send_message m, erp_member_info u
+		where m.message_sender = u.member_info_id and m.message_id = #{message_id};
+	</select>
     
 </mapper>

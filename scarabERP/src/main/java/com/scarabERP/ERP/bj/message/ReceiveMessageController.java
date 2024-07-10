@@ -19,7 +19,7 @@ public class ReceiveMessageController {
 	ReceiveMessageDAO dao;
 	
 	@Autowired
-	ReceiveMessageService service;
+	MessageService service;
 	
 	@PostMapping("/insert")
 	public void insert(@RequestBody MessageVO vo) {
@@ -43,6 +43,9 @@ public class ReceiveMessageController {
 		dao.updateReceiveState(vo);
 	}
 	
-
+	@GetMapping("/read/{message_id}")
+	public MessageVO readReceive(@PathVariable("message_id") int message_id) {
+		return dao.readReceive(message_id);
+	}
 	
 }

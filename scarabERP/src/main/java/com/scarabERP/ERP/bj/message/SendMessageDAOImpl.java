@@ -40,5 +40,11 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 		
 	}
 
+
+	@Override
+	public MessageVO readSend(int message_id) {
+		return session.selectOne(namespace + ".readSend", message_id);
+	}
+
 	
 }

@@ -6,6 +6,7 @@ public class MessageVO {
 	private int message_id;
 	private String message_sender;
 	private String message_receiver;
+	private String message_title;
 	private String message_content;
 	private Date message_senddate;
 	private Date message_readdate;
@@ -14,6 +15,12 @@ public class MessageVO {
 	
 	public int getMessage_id() {
 		return message_id;
+	}
+	public String getMessage_title() {
+		return message_title;
+	}
+	public void setMessage_title(String message_title) {
+		this.message_title = message_title;
 	}
 	public void setMessage_id(int message_id) {
 		this.message_id = message_id;
@@ -54,12 +61,14 @@ public class MessageVO {
 	public void setMessage_state(int message_state) {
 		this.message_state = message_state;
 	}
+	
 	@Override
 	public String toString() {
 		return "MessageVO [message_id=" + message_id + ", message_sender=" + message_sender + ", message_receiver="
-				+ message_receiver + ", message_content=" + message_content + ", message_senddate=" + message_senddate
-				+ ", message_readdate=" + message_readdate + ", message_state=" + message_state + "]";
+				+ message_receiver + ", message_title=" + message_title + ", message_content=" + message_content
+				+ ", message_senddate=" + message_senddate + ", message_readdate=" + message_readdate
+				+ ", message_state=" + message_state + "]";
 	}
-	
+
 	
 }

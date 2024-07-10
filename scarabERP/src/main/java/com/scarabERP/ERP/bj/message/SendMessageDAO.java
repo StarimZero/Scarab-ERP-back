@@ -7,6 +7,6 @@ public interface SendMessageDAO {
 	public List<MessageVO> list(String message_sender);
 	public void updateSendState(MessageVO vo);
 	public void delete(int message_id);
-
+	public MessageVO readSend(int message_id);
 
 }
