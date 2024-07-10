@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.scarabERP.ERP.common.QueryVO;
 
@@ -48,8 +49,13 @@ public class MemberController {
 	}
 	
 	@PutMapping("/info")
-	public void updateInfo(@RequestBody MemberVO vo) {
-		dao.updateInfo(vo);
+	public void updateInfo(@PathVariable("member_info_key") String member_info_key, @RequestBody MemberVO vo, MultipartHttpServletRequest multi) throws Exception {
+		service.updateInfo(member_info_key, vo, multi);
+	}
+	
+	@PutMapping("/login")
+	public void updateLogin(@RequestBody MemberVO vo) {
+		dao.updateLogin(vo);
 	}
 	
 	@PutMapping("/dept")

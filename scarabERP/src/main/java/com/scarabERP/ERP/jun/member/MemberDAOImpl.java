@@ -49,6 +49,12 @@ public class MemberDAOImpl implements MemberDAO{
 		// TODO Auto-generated method stub
 		session.update(namespace + ".update_info", vo);
 	}
+
+	@Override
+	public void updateLogin(MemberVO vo) {
+		// TODO Auto-generated method stub
+		session.update(namespace + ".update_login", vo);
+	}
 	
 	@Override
 	public void updateDept(MemberVO vo) {
