@@ -16,4 +16,7 @@ public interface SalesDAO {
 	
 	//판매 삭제하기
 	public void delete(String sales_id);
+	
+	//판매 수정하기
+	public void update(SalesVO vo);
 }
