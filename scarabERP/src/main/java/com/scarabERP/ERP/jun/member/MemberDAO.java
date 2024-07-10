@@ -9,7 +9,7 @@ public interface MemberDAO {
 	public int total(QueryVO vo);
 	public String getERPMemberKey();
 	public void insert(MemberVO vo);
-	public MemberVO read(String member_info_key);
+	public MemberVO read(String member_info_id);
 	public void updateInfo(MemberVO vo);
 	public void updateDept(MemberVO vo);
 	public void updateJob(MemberVO vo);

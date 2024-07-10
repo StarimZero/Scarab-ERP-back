@@ -2,12 +2,17 @@ package com.scarabERP.ERP.han.visitor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 @RestController
 @RequestMapping("/web/visitor")
@@ -29,7 +34,6 @@ public class VisitorController {
 		//아이디 맞고 비번 틀림 (2 리턴)
 		//아이디 맞고 비번도 맞음 (1 리턴 - 로그인성공)
 		int result=0;
-
 		VisitorVO visitor = dao.login(vo.getVisitor_id());
 		if(visitor != null){
 			//암호화된 비번 비교
@@ -49,7 +53,6 @@ public class VisitorController {
 	@PostMapping("/insert")
 	public void insert(@RequestBody VisitorVO vo) {
 		//비밀번호 암호화
-
 		String vpass = encoder.encode(vo.getVisitor_pass());
 		vo.setVisitor_pass(vpass);
 		dao.insert(vo);
@@ -61,8 +64,27 @@ public class VisitorController {
 		return dao.mypage(visitor_id);
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public void update(@RequestBody VisitorVO vo) {
+		//비밀번호 암호화
+		String vpass = encoder.encode(vo.getVisitor_pass());
+		vo.setVisitor_pass(vpass);
 		dao.update(vo);
+	}
+	
+	@DeleteMapping("/delete/{visitor_id}")
+	public void delete(@PathVariable("visitor_id") String visitor_id) {
+		System.out.println("삭제전");
+		dao.delete(visitor_id);
+		System.out.println("삭제후");
+	}
+	
+
+	@Autowired
+	private VisitorService visitorService;
+	@PostMapping("/searchid")
+	public String searchid(@RequestParam String visitor_email) {		
+		visitorService.searchid(visitor_email);
+		return "아이디 있으면 이메일로 보내줌";
 	}
 }

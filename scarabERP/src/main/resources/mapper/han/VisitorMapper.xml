@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.han.VisitorMapper">
+	<select id="searchpass" resultType="com.scarabERP.ERP.han.visitor.VisitorVO">
+		select * from web_visitor where 
+	</select>
+	
+	<select id="searchid" resultType="com.scarabERP.ERP.han.visitor.VisitorVO">
+		select visitor_id from web_visitor where visitor_email=#{visitor_email}
+	</select>
+	
+	<delete id="delete">
+		delete from web_visitor where visitor_id=#{visitor_id}
+	</delete>
+	
 	<update id="update">
 		update web_visitor
 		set visitor_pass=#{visitor_pass}, visitor_name=#{visitor_name}, visitor_email=#{visitor_email}, visitor_birthday=#{visitor_birthday},

@@ -42,9 +42,9 @@ public class MemberController {
 		return dao.getERPMemberKey();
 	}
 	
-	@GetMapping("/{member_info_key}")
-	public MemberVO read(@PathVariable("member_info_key") String member_info_key) {
-		return dao.read(member_info_key);
+	@GetMapping("/{member_info_id}")
+	public MemberVO read(@PathVariable("member_info_id") String member_info_id) {
+		return dao.read(member_info_id);
 	}
 	
 	@PutMapping("/info")

@@ -1,5 +1,7 @@
 package com.scarabERP.ERP.starim.items;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.scarabERP.ERP.common.QueryVO;
 
@@ -45,6 +49,25 @@ public class ItemsController {
 	@PutMapping
 	public void update(@RequestBody ItemsVO vo) {
 		dao.update(vo);
+	}
+	
+	@PostMapping("/update/image/{items_id}")
+	public void updateImage(@PathVariable("items_id") String items_id, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+		//파일업로드
+		MultipartFile file = multi.getFile("byte");
+		String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/items/";
+		String fileName = items_id + ".jpg";
+		File oldFile = new File(filePath + fileName);
+		if(oldFile.exists()) {
+			oldFile.delete();
+		}else {
+			//이미지업로드한걸로 업데이트
+			ItemsVO vo = new ItemsVO();
+			vo.setItems_id(items_id);
+			vo.setItems_photo("/display?file=" + filePath + fileName);
+			dao.updatePhoto(vo);
+		}
+		file.transferTo(new File("c:" + filePath + fileName));
 	}
 	
 }
