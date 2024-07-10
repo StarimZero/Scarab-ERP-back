@@ -6,4 +6,6 @@ public interface VisitorDAO {
 	public VisitorVO check(String visitor_id);
 	public void insert(VisitorVO vo);
 	public void update(VisitorVO vo);
+	public void delete(String visitor_id);
+	public VisitorVO searchid(String visitor_email);
 }
