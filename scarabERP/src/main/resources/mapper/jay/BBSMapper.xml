@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scarabERP.ERP.mapper.BBSMapper">
+	
+	<insert id="insertBBS" >
+		insert into web_bbs(bbs_id, bbs_title, bbs_writer, bbs_content, bbs_regDate, bbs_category)
+		values(#{bbs_id},#{bbs_title}, #{bbs_writer}, #{bbs_content}, #{bbs_regDate}, #{bbs_category})
+	</insert>
+		
+	<select id="BBSlist" resultType="com.scarabERP.ERP.jay.BBS.BBSVO">
+		select * from web_bbs
+		order by bbs_id desc
+	</select>
+	 	<select id="BBSread" resultType="com.scarabERP.ERP.jay.BBS.BBSVO">
+	 		select from web_bbs
+	 		where bbs_id=#{bbs_id}
+	 	</select>
+	 
+	 <select id="now" resultType="string">
+	 	select now();
+	 </select>
+	 <update id="BBSupdate">
+		update 	
+	 </update>
+</mapper>
