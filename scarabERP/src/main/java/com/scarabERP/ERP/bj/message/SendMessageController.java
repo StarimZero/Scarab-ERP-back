@@ -25,7 +25,7 @@ public class SendMessageController {
 		
 	}
 	
-	@GetMapping("/list/{message_sender}") // erp/sendmessage/list/kiin
+	@GetMapping("/list.json/{message_sender}") // erp/sendmessage/list.json/red
 	public List<MessageVO> list(@PathVariable("message_sender") String message_sender) {
 		return dao.list(message_sender);
 	}
@@ -45,5 +45,7 @@ public class SendMessageController {
 	public MessageVO readSend(@PathVariable("message_id")int message_id) {
 		return dao.readSend(message_id);
 	}
+	
+
 		
 }

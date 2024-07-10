@@ -38,4 +38,10 @@ public class SalesDAOImpl implements SalesDAO {
 		
 	}
 
+	@Override
+	public void update(SalesVO vo) {
+		session.update(namespace + ".update", vo);
+		
+	}
+
 }
