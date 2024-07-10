@@ -1,5 +1,8 @@
 package com.scarabERP.ERP.han.visitor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,6 +47,10 @@ public class VisitorDAOImpl implements VisitorDAO{
 	public VisitorVO searchid(String visitor_email) {
 		return session.selectOne(namespace + ".searchid", visitor_email);
 	}
+
+
+
+
 
 	
 }
