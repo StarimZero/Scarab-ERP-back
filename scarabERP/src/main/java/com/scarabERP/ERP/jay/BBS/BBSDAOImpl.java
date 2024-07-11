@@ -13,31 +13,30 @@ public class BBSDAOImpl implements BBSDAO{
 
 	@Override
 	public void insert(BBSVO vo) {
-		// TODO Auto-generated method stub
+		session.insert(namespace + ".insertBBS", vo);
+
 		
 	}
 
 	@Override
 	public BBSVO read(int bbs_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(namespace + ".BBSread", bbs_id);
 	}
 
 	@Override
 	public List<BBSVO> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(namespace + ".BBSlist");
 	}
 
 	@Override
 	public void update(BBSVO vo) {
-		// TODO Auto-generated method stub
+		session.update(namespace + ".BBSupdate", vo);
 		
 	}
 
 	@Override
 	public void delete(int bbs_id) {
-		// TODO Auto-generated method stub
+		session.delete(namespace + ".deleteBBS",bbs_id);
 		
 	}
 
