@@ -56,4 +56,11 @@ public class ItemsDAOImply implements ItemsDAO {
 		
 	}
 
+
+	@Override
+	public void insertPhoto(ItemsVO vo) {
+		session.insert(namespace + ".insertPhoto", vo);
+		
+	}
+
 }

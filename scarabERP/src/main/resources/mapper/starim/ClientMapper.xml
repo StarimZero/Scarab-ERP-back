@@ -10,8 +10,8 @@
 	<delete id="delete">
 		delete from erp_client where client_id = #{client_id}
 	</delete>
-	<select id="read" resultType="com.scarabERP.ERP.starim.items.ItemsVO">
-		select * from client_ClientVO where client_id = #{client_id}
+	<select id="read" resultType="com.scarabERP.ERP.starim.client.ClientVO">
+		select * from erp_client where client_id = #{client_id}
 	</select>
 	<update id="update">
 		update erp_client set client_name=#{client_name}, client_person=#{client_person}, client_employee=#{client_employee}, client_phone=#{client_phone}, client_address=#{client_address}, client_credit_limit=#{client_credit_limit}, client_fax=#{client_fax}, client_email=#{client_email} where client_id = #{client_id}

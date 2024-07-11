@@ -48,6 +48,27 @@ public class VisitorDAOImpl implements VisitorDAO{
 		return session.selectOne(namespace + ".searchid", visitor_email);
 	}
 
+	@Override
+	public VisitorVO matchpass(String visitor_id, String visitor_email) {
+        Map<String, String> params = new HashMap<>();
+        params.put("visitor_id", visitor_id);
+        params.put("visitor_email", visitor_email);
+        return session.selectOne(namespace + ".matchpass", params);
+	}
+
+	@Override
+	public void updatepass(String visitor_id, String visitor_pass) {
+        Map<String, String> params = new HashMap<>();
+        params.put("visitor_id", visitor_id);
+        params.put("visitor_pass", visitor_pass);
+        session.update(namespace + ".updatepass", params);
+	}
+
+	@Override
+	public void updatePhoto(VisitorVO vo) {
+		session.update(namespace + ".updatePhoto", vo);
+	}
+
 
 
 
