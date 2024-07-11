@@ -11,6 +11,7 @@ public interface MemberDAO {
 	public void insert(MemberVO vo);
 	public MemberVO read(String member_info_id);
 	public void updateInfo(MemberVO vo);
+	public void updateLogin(MemberVO vo);
 	public void updateDept(MemberVO vo);
 	public void updateJob(MemberVO vo);
 	public void updateAuth(MemberVO vo);

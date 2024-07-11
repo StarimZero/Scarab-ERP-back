@@ -8,4 +8,6 @@ public interface VisitorDAO {
 	public void update(VisitorVO vo);
 	public void delete(String visitor_id);
 	public VisitorVO searchid(String visitor_email);
+
+	
 }

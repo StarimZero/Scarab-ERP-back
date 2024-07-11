@@ -1,5 +1,6 @@
 package com.scarabERP.ERP.bj.message;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.scarabERP.ERP.common.QueryVO;
 
 @RestController
 @RequestMapping("/erp/sendmessage")
@@ -36,9 +39,9 @@ public class SendMessageController {
 		dao.delete(message_id);
 	}
 	
-	@PostMapping("/update/send/state")
-	public void updateSendState(@RequestBody MessageVO vo) {
-		dao.updateSendState(vo);
+	@PostMapping("/update/send/state/{message_id}")
+	public void updateSendState(@PathVariable("message_id") int message_id) {
+		dao.updateSendState(message_id);
 	}
 	
 	@GetMapping("/read/{message_id}")
@@ -46,6 +49,14 @@ public class SendMessageController {
 		return dao.readSend(message_id);
 	}
 	
+	@GetMapping("/deletelist/{message_sender}")
+	public HashMap<String, Object> deletelist(QueryVO vo, @PathVariable("message_sender") String message_sender) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("total", dao.total(vo));
+		map.put("deleteList", dao.deleteList(vo, message_sender));
+		return map;
+	}
+
 
 		
 }
