@@ -1,10 +1,18 @@
 package com.scarabERP.ERP.han.visitor;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.scarabERP.ERP.starim.items.ItemsVO;
 
 
 
@@ -65,12 +77,31 @@ public class VisitorController {
 		return dao.mypage(visitor_id);
 	}
 	
-	@PutMapping("/update")
+	@PostMapping("/update")
 	public void update(@RequestBody VisitorVO vo) {
 		//비밀번호 암호화
 		String vpass = encoder.encode(vo.getVisitor_pass());
 		vo.setVisitor_pass(vpass);
 		dao.update(vo);
+	}
+	
+	@PostMapping("/updatePhoto")
+	public void updatePhoto(@RequestParam("visitor_id") String visitor_id, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+		//파일업로드
+		MultipartFile file = multi.getFile("byte");
+		String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/visitor/";
+		String fileName = visitor_id + ".jpg";
+		File oldFile = new File(filePath + fileName);
+		if(oldFile.exists()) {
+			oldFile.delete();
+		}else {
+			//이미지업로드한걸로 업데이트
+			VisitorVO vo = new VisitorVO();
+			vo.setVisitor_id(visitor_id);
+			vo.setVisitor_photo("/display?file=" + filePath + fileName);
+			dao.updatePhoto(vo);
+		}
+		file.transferTo(new File("c:" + filePath + fileName));
 	}
 	
 	@DeleteMapping("/delete/{visitor_id}")
@@ -88,6 +119,14 @@ public class VisitorController {
 	}
 
 	
-
+    @PostMapping("/searchpass")
+    public ResponseEntity<String> resetPassword(@RequestBody VisitorPassRequest request) {
+        try {
+            visitorService.resetPassword(request.getVisitor_id(), request.getVisitor_email());
+            return ResponseEntity.ok("해당 이메일로 새 비밀번호를 전송했습니다.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 	
 }
