@@ -18,5 +18,6 @@ public interface ItemsDAO {
 	public void update(ItemsVO vo);
 	//물품사진 업로드
 	public void updatePhoto(ItemsVO vo);
-	
+	//사진등록
+	public void insertPhoto(ItemsVO vo);
 }

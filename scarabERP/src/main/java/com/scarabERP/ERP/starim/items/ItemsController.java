@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,6 +52,31 @@ public class ItemsController {
 		dao.update(vo);
 	}
 	
+	@PostMapping("/update1")
+	public void update1(ItemsVO vo,  MultipartHttpServletRequest multi)throws Exception{
+		MultipartFile file= multi.getFile("byte");
+		if(!file.isEmpty()) {
+			System.out.println("file.........."+ file.getOriginalFilename());
+			//파일업로드
+			String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/items/";
+			String fileName = vo.getItems_id() + ".jpg";
+			File oldFile = new File(filePath + fileName);
+			if(oldFile.exists()) {
+				oldFile.delete();
+			}else {
+				//이미지업로드한걸로 업데이트
+				ItemsVO item = new ItemsVO();
+				vo.setItems_id(item.getItems_id());
+				vo.setItems_photo("/display?file=" + filePath + fileName);
+				dao.updatePhoto(item);
+			}
+			file.transferTo(new File("c:" + filePath + fileName));
+		}
+		
+		System.out.println(vo.toString());
+		dao.update(vo);
+	}
+	
 	@PostMapping("/update/image/{items_id}")
 	public void updateImage(@PathVariable("items_id") String items_id, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
 		//파일업로드
@@ -69,5 +95,26 @@ public class ItemsController {
 		}
 		file.transferTo(new File("c:" + filePath + fileName));
 	}
+	
+	
+	@PostMapping("/1")
+	public void insert1(ItemsVO vo,  MultipartHttpServletRequest multi)throws Exception{
+		
+		MultipartFile file= multi.getFile("byte");
+		if(file.isEmpty()) {
+			System.out.println("file.........."+ file.getOriginalFilename());
+			//파일업로드
+			String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/items/";
+			String fileName = vo.getItems_id() + ".jpg";
+				//이미지업로드한걸로 업데이트
+				ItemsVO item = new ItemsVO();
+				vo.setItems_photo("/display?file=" + filePath + fileName);
+				dao.insert(item);
+			file.transferTo(new File("c:" + filePath + fileName));
+		}
+	}
+
+	
+	
 	
 }

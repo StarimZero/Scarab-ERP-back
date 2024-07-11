@@ -1,10 +1,13 @@
 package com.scarabERP.ERP.bj.message;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.scarabERP.ERP.common.QueryVO;
 
 
 @Repository
@@ -28,8 +31,8 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 	}
 
 	@Override
-	public void updateSendState(MessageVO vo) {
-		session.update(namespace + ".updateSendState", vo);
+	public void updateSendState(int message_id) {
+		session.update(namespace + ".updateSendState", message_id);
 		
 		  
 	}
@@ -44,6 +47,21 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 	@Override
 	public MessageVO readSend(int message_id) {
 		return session.selectOne(namespace + ".readSend", message_id);
+	}
+
+
+	@Override
+	public List<HashMap<String, Object>> deleteList(QueryVO vo, String message_sender) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("message_sender", message_sender);
+		map.put("query", vo);
+		return session.selectList(namespace + ".deleteList", map);
+	}
+
+
+	@Override
+	public int total(QueryVO vo) {
+		return session.selectOne(namespace + ".total", vo);
 	}
 
 	

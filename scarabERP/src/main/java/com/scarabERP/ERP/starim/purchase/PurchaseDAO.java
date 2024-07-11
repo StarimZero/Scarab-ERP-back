@@ -1,0 +1,23 @@
+package com.scarabERP.ERP.starim.purchase;
+
+import java.util.List;
+
+import com.scarabERP.ERP.common.QueryVO;
+
+public interface PurchaseDAO {
+	//구매 아이디 들고오기
+	public String getPurchaseID();
+	
+	//구매 등록하기
+	public void insert(PurchaseVO vo);
+	
+	//구매 리스트
+	public List<PurchaseVO> list(QueryVO vo);
+	
+	//구매 삭제하기
+	public void delete(String purchase_id);
+	
+	//구매 수정
+	public void update(PurchaseVO vo);
+
+}

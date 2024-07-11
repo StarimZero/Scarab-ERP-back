@@ -56,13 +56,19 @@
 	
 	<update id="update_info">
 		UPDATE erp_member_info SET 
-		member_info_id = #{member_info_id}, 
-		member_info_pass = #{member_info_pass}, 
+		member_info_photo = #{member_info_photo}
 		member_info_phone = #{member_info_phone}, 
 		member_info_address1 = #{member_info_address1}, 
 		member_info_address2 = #{member_info_address2}, 
 		member_info_email = #{member_info_email}, 
 		member_info_account = #{member_info_account} 
+		WHERE member_info_key = #{member_info_key}
+	</update>
+	
+	<update id="update_login">
+		UPDATE erp_member_info SET 
+		member_info_id = #{member_info_id}, 
+		member_info_pass = #{member_info_pass} 
 		WHERE member_info_key = #{member_info_key}
 	</update>
 	

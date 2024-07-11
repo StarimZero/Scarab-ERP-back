@@ -14,6 +14,7 @@ public class BBSDAOImpl implements BBSDAO{
 	@Override
 	public void insert(BBSVO vo) {
 		session.insert(namespace + ".insertBBS", vo);
+
 		
 	}
 
@@ -24,7 +25,6 @@ public class BBSDAOImpl implements BBSDAO{
 
 	@Override
 	public List<BBSVO> list() {
-		
 		return session.selectList(namespace + ".BBSlist");
 	}
 
