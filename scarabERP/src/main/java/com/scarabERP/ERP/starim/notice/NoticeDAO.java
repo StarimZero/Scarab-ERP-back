@@ -5,8 +5,10 @@ import java.util.List;
 import com.scarabERP.ERP.common.QueryVO;
 
 public interface NoticeDAO {
-	//게시판리스트
+	//게시판리스트 페이지네이션
 	public List<NoticeVO> list(QueryVO vo);
+	//게시판리스트전체
+		public List<NoticeVO> listpage(QueryVO vo);
 	//토탈구하는거
 	public int total(QueryVO vo);
 	//게시물읽기

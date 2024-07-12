@@ -21,7 +21,7 @@ public class VendorController {
 	@Autowired
 	VendorDAO dao;
 	
-	@GetMapping("/list.json")
+	@GetMapping
 	public List<VendorVO> list(QueryVO vo) {
 		return dao.list(vo);
 	}
