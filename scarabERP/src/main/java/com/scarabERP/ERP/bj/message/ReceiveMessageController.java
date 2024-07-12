@@ -30,9 +30,12 @@ public class ReceiveMessageController {
 		
 	}
 	
-	@GetMapping("/list.json/{message_receiver}") // erp/receivemessage/list.json/kiin
-	public List<MessageVO> list(@PathVariable("message_receiver") String message_receiver) {
-		return dao.list(message_receiver);
+	@GetMapping("/list/{message_receiver}") // erp/receivemessage/list/kiin?pag=1&size=100
+	public HashMap<String, Object> list(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("total", dao.total(vo));
+		map.put("list", dao.list(vo, message_receiver));
+		return map;
 	}
 	
 
@@ -62,9 +65,9 @@ public class ReceiveMessageController {
 		return dao.readReceive(message_id);
 	}
 	
-	@PostMapping("/update/readdate")
-	public void updateReadDate(@RequestBody MessageVO vo) {
-		dao.updateReadDate(vo);
+	@PostMapping("/update/readdate/{message_id}")
+	public void updateReadDate(@PathVariable("message_id") int message_id) {
+		dao.updateReadDate(message_id);
 	}
 	
 	@PostMapping("/reset/state/{message_id}")

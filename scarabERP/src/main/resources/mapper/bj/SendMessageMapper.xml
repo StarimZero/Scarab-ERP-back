@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.bj.SendMessageMapper">
 		
-		<select id="list" resultType="com.scarabERP.ERP.bj.message.MessageVO">
+		<select id="list" resultType="hashmap">
 			select m.* ,u.member_info_id
 			from erp_send_message m, erp_member_info u 
-			where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=0;
+			where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=0
+			ORDER BY message_id DESC
+       		LIMIT #{query.start}, #{query.size};
 		</select>
 		
 	 <insert id="insert">
@@ -61,4 +63,10 @@
 
     </select>
     
+    
+     <update id="resetState">
+		update erp_send_message
+		set message_state=0
+		where message_id=#{message_id};
+	</update>
 </mapper>

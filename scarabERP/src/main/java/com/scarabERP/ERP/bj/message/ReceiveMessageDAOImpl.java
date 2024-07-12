@@ -39,8 +39,11 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 
 
 	@Override
-	public List<MessageVO> list(String message_receiver) {
-		return session.selectList(namespace + ".list", message_receiver);
+	public List<HashMap<String,Object>> list(QueryVO vo, String message_receiver) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("message_receiver", message_receiver);
+		map.put("query", vo);
+		return session.selectList(namespace + ".list", map);
 	}
 
 	@Override
@@ -53,10 +56,12 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 
 
 
+
+
 	@Override
-	public void updateReadDate(MessageVO vo) {
+	public void updateReadDate(int message_id) {
 		
-		session.update(namespace + ".updateReadDate", vo);
+		session.update(namespace + ".updateReadDate", message_id);
 	}
 
 
