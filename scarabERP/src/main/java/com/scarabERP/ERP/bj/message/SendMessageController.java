@@ -1,7 +1,7 @@
 package com.scarabERP.ERP.bj.message;
 
 import java.util.HashMap;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +28,20 @@ public class SendMessageController {
 		
 	}
 	
-	@GetMapping("/list.json/{message_sender}") // erp/sendmessage/list.json/red
-	public List<MessageVO> list(@PathVariable("message_sender") String message_sender) {
-		return dao.list(message_sender);
+	@GetMapping("/list/{message_sender}") // erp/sendmessage/list/red
+	public HashMap<String, Object> list(QueryVO vo, @PathVariable("message_sender") String message_sender) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("total", dao.total(vo));
+		map.put("list", dao.list(vo, message_sender));
+		return map;
+	}
+	
+	@GetMapping("/deletelist/{message_sender}")
+	public HashMap<String, Object> deletelist(QueryVO vo, @PathVariable("message_sender") String message_sender) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("total", dao.total(vo));
+		map.put("deleteList", dao.deleteList(vo, message_sender));
+		return map;
 	}
 	
 	
@@ -49,14 +60,10 @@ public class SendMessageController {
 		return dao.readSend(message_id);
 	}
 	
-	@GetMapping("/deletelist/{message_sender}")
-	public HashMap<String, Object> deletelist(QueryVO vo, @PathVariable("message_sender") String message_sender) {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
-		map.put("deleteList", dao.deleteList(vo, message_sender));
-		return map;
-	}
 
-
+	@PostMapping("/reset/state/{message_id}")
+	public void resetState(@PathVariable("message_id") int message_id) {
+		dao.resetState(message_id);
 		
+	}	
 }

@@ -38,8 +38,11 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 	}
 
 	@Override
-	public List<MessageVO> list(String message_sender) {
-		return session.selectList(namespace + ".list", message_sender);
+	public List<HashMap<String, Object>> list(QueryVO vo, String message_sender) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("message_sender", message_sender);
+		map.put("query", vo);
+		return session.selectList(namespace + ".list", map);
 		
 	}
 
@@ -62,6 +65,13 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 	@Override
 	public int total(QueryVO vo) {
 		return session.selectOne(namespace + ".total", vo);
+	}
+
+
+	@Override
+	public void resetState(int message_id) {
+		session.update(namespace + ".resetState", message_id);
+		
 	}
 
 	
