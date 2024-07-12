@@ -1,6 +1,7 @@
 package com.scarabERP.ERP.starim.notice;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,12 +25,17 @@ public class NoticeController {
 	@Autowired
 	NoticeService service;
 
-	@GetMapping("/list.json") // 테스트 http://localhost:8080/bbs/list.json?key=uid&word=&page=1&size=3
+	@GetMapping // 테스트 http://localhost:8080/bbs/list.json?key=uid&word=&page=1&size=3
 	public HashMap<String, Object> list(QueryVO vo){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("total", dao.total(vo));
 		map.put("documents", dao.list(vo));
 		return map;
+	}
+	
+	@GetMapping("/list.json") // 
+	public List<NoticeVO> listPage(QueryVO vo) {
+		return dao.listpage(vo);
 	}
 	
 	@GetMapping("/{notice_id}") //테스트 http://localhost:8080/bbs/114

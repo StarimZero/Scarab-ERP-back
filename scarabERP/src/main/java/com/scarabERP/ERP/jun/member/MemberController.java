@@ -48,7 +48,7 @@ public class MemberController {
 		return dao.read(member_info_id);
 	}
 	
-	@PutMapping("/info")
+	@PostMapping("/info/{member_info_key}")
 	public void updateInfo(@PathVariable("member_info_key") String member_info_key, @RequestBody MemberVO vo, MultipartHttpServletRequest multi) throws Exception {
 		service.updateInfo(member_info_key, vo, multi);
 	}

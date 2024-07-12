@@ -24,7 +24,7 @@ public class ClientController {
 	@Autowired
 	ClientDAO dao;
 	
-	@GetMapping("/list.json")
+	@GetMapping
 	public List<ClientVO> list(QueryVO vo) {
 		return dao.list(vo);
 	}

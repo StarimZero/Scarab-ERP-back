@@ -68,4 +68,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 	}
 
+	@Override
+	public List<NoticeVO> listpage(QueryVO vo) {
+		return session.selectList(namespace + ".listpage", vo);
+	}
+
 }
