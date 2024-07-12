@@ -16,6 +16,10 @@
 			  </where>
 			  order by notice_id desc limit #{start}, #{size};
  		</select>
+ 		<select id="listpage" resultType="com.scarabERP.ERP.starim.notice.NoticeVO">
+	 		select * from erp_notice;
+ 		</select>
+ 		
  		<select id ="total" resultType="int">
 	 		select count(*) from erp_notice
 	 		<if test="key=='notice_writer'">
