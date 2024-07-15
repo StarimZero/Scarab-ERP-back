@@ -1,6 +1,5 @@
 package com.scarabERP.ERP.starim.sales;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,42 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.scarabERP.ERP.common.QueryVO;
 
 @RestController
-@RequestMapping("/erp/sales")
-public class SalesController {
-
+@RequestMapping("/erp/sales/info")
+public class SalesInfoController {
 	
 	@Autowired
-	SalesDAO dao;
+	SalesInfoDAO dao;
 	
-	@Autowired
-	SalesService service;
 	
 	@PostMapping
-	public void insert(SalesInfoVO vo) {
-		service.insert(vo);
+	public void insert(@RequestBody SalesInfoVO vo) {
+		dao.insert(vo);
 	}
 	
-//	@PostMapping
-//	public void insert(@RequestBody SalesVO vo1, @RequestBody SalesInfoVO vo2) {
-//		service.insert12(vo1, vo2);
-//	}
-	
-
 	@GetMapping
 	public List<SalesInfoVO> listPage(QueryVO vo) {
 		return dao.list(vo);
 	}
 	
 	@DeleteMapping("/{sales_id}")
-	public void delete(@PathVariable("sales_id") String sales_id) {
-		dao.delete(sales_id);
+	public void delete(@PathVariable("sales_info_id") String sales_info_id) {
+		dao.delete(sales_info_id);
 	}
 	
 	@PutMapping
 	public void update(@RequestBody SalesInfoVO vo) {
 		dao.update(vo);
 	}
-	
 
-	
 }

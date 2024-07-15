@@ -9,17 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.scarabERP.ERP.common.QueryVO;
 
 @Repository
-public class SalesDAOImpl implements SalesDAO {
-	
+public class SalesInfoDAOImpl implements SalesInfoDAO{
 	
 	@Autowired
 	SqlSession session;
-	String namespace = "com.scarabERP.ERP.mapper.SalesMapper";
-
-	@Override
-	public String getSaleID() {
-		return session.selectOne(namespace + ".getSaleID");
-	}
+	String namespace = "com.scarabERP.ERP.mapper.SalesInfoMapper";
 
 	@Override
 	public void insert(SalesInfoVO vo) {
@@ -32,8 +26,8 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 
 	@Override
-	public void delete(String sales_id) {
-		session.delete(namespace + ".delete", sales_id);
+	public void delete(String sales_info_id) {
+		session.delete(namespace + ".delete", sales_info_id);
 		
 	}
 
