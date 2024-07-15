@@ -1,15 +1,19 @@
 package com.scarabERP.ERP.jun.attendance;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.scarabERP.ERP.jun.member.MemberVO;
 
 public class AttendanceVO extends MemberVO{
 	private String member_attendance_key;
 	private String member_info_key;
 	private Date member_attendance_date;
-	private Date member_attendance_start;
-	private Date member_attendance_end;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	private Timestamp member_attendance_start;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	private Timestamp member_attendance_end;
 	private int hours_worked;
 	private int minutes_worked;
 	
@@ -43,16 +47,16 @@ public class AttendanceVO extends MemberVO{
 	public void setMember_attendance_date(Date member_attendance_date) {
 		this.member_attendance_date = member_attendance_date;
 	}
-	public Date getMember_attendance_start() {
+	public Timestamp getMember_attendance_start() {
 		return member_attendance_start;
 	}
-	public void setMember_attendance_start(Date member_attendance_start) {
+	public void setMember_attendance_start(Timestamp member_attendance_start) {
 		this.member_attendance_start = member_attendance_start;
 	}
-	public Date getMember_attendance_end() {
+	public Timestamp getMember_attendance_end() {
 		return member_attendance_end;
 	}
-	public void setMember_attendance_end(Date member_attendance_end) {
+	public void setMember_attendance_end(Timestamp member_attendance_end) {
 		this.member_attendance_end = member_attendance_end;
 	}
 	public int getHours_worked() {
