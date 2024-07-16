@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.scarabERP.ERP.common.QueryVO;
 
-public interface SalesDAO {
-	//판매 아이디 들고오기
-	public String getSaleID();
+public interface SalesInfoDAO {
 	
 	//판매 등록하기
 	public void insert(SalesInfoVO vo);
@@ -19,4 +17,6 @@ public interface SalesDAO {
 	
 	//판매 수정하기
 	public void update(SalesInfoVO vo);
+
+
 }
