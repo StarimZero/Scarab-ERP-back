@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scarabERP.ERP.mapper.jun.TransactionMapper">
+	<insert id="insert">
+		INSERT INTO erp_account(account_number, transaction_deposit, 
+		transaction_withdraw, member_info_key, client_id, vendor_id)
+		VALUES(#{account_number}, #{transaction_deposit}, #{transaction_withdraw}, 
+		#{member_info_key}, #{client_id}, #{vendor_id})
+	</insert>
+	
+	<select id="list" resultType="com.scarabERP.ERP.jun.transaction.TransactionVO">
+		SELECT * FROM erp_transaction 
+		<if test="key == 'member_info_key'">
+			WHERE member_info_key like #{word}
+		</if>
+		<if test="key == 'client_id'">
+			WHERE client_id like #{word}
+		</if>
+		<if test="key == 'vendor_id'">
+			WHERE vendor_id like #{word}
+		</if>
+		<if test="key == 'transaction_date'">
+			WHERE transaction_date = #{transaction_date}
+		</if> 
+		AND account_number = #{account_number}
+		ORDER BY transaction_date desc 
+		limit #{start}, #{size}
+	</select>
+	
+	<select id="total" resultType="int">
+		SELECT count(*) total 
+		FROM erp_transaction 
+		<if test="key == 'member_info_key'">
+			WHERE member_info_key like #{word}
+		</if>
+		<if test="key == 'client_id'">
+			WHERE client_id like #{word}
+		</if>
+		<if test="key == 'vendor_id'">
+			WHERE vendor_id like #{word}
+		</if>
+		<if test="key == 'transaction_date'">
+			WHERE transaction_date = #{transaction_date}
+		</if> 
+		AND account_number = #{account_number}
+	</select>
+	
+	<select id="read" resultType="com.scarabERP.ERP.jun.transaction.TransactionVO">
+		SELECT t.*, m.member_info_name, c.client_name, v.vendor_name
+		FROM erp_transaction t 
+		LEFT JOIN erp_member_info m ON t.member_info_key = m.member_info_key 
+		LEFT JOIN erp_client c ON t.client_id = c.client_id 
+		LEFT JOIN erp_vendor v on t.vendor_id = v.vendor_id 
+		WHERE transaction_id = #{transaction_id}
+	</select>
+</mapper>
