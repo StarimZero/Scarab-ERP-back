@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		//파일업로드
 		MultipartFile file=multi.getFile("byte");
-		String filePath="/Scarab ERP/Scarab-ERP-front/public/images/member/";
+		String filePath="/data/scarab/Scarab-ERP-front/public/images/member/";
 		String fileName = member_info_key + ".jpg";
 
 		// 파일이 존재하면 삭제
@@ -36,8 +36,9 @@ public class MemberServiceImpl implements MemberService{
 			//이미지이름변경
 			vo.setMember_info_key(member_info_key);
 			vo.setMember_info_photo("/display?file=" + filePath + fileName);
-			dao.updateInfo(vo);
 		}
 		file.transferTo(new File("c:" + filePath + fileName));
+		System.out.println("..."+ vo.toString());
+		dao.updateInfo(vo);
 	}
 }

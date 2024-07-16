@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.bj.SendMessageMapper">
 		
-		<select id="list" resultType="com.scarabERP.ERP.bj.message.MessageVO">
-			select * from erp_send_message 
-			where message_sender = #{message_sender};
+		<select id="list" resultType="hashmap">
+			select m.* ,u.member_info_id
+			from erp_send_message m, erp_member_info u 
+			where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=0
+			ORDER BY message_id DESC
+       		LIMIT #{query.start}, #{query.size};
 		</select>
 		
 	 <insert id="insert">
@@ -31,5 +34,39 @@
 		from erp_send_message m, erp_member_info u
 		where m.message_sender = u.member_info_id and m.message_id = #{message_id};
 	</select>
+	
+	
+	<select id="deleteList" resultType="hashmap">
+      	select m.* ,u.member_info_id
+		from erp_send_message m, erp_member_info u 
+		where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=1
+        ORDER BY message_id DESC
+        LIMIT #{query.start}, #{query.size}
+    </select>
+
+
+    <select id="total" resultType="int">
+        select count(*) 
+        FROM erp_send_message
+        <if test="key == 'message_id'">
+          where message_id like #{word}
+        </if>
+        <if test="key == 'message_receiver'">
+           where message_receiver like #{word}
+        </if>
+        <if test="key == 'message_sender'">
+           where message_sender like #{word}
+        </if>
+        <if test="key == 'message_title'">
+           where message_title like #{word}
+        </if>
+
+    </select>
     
+    
+     <update id="resetState">
+		update erp_send_message
+		set message_state=0
+		where message_id=#{message_id};
+	</update>
 </mapper>

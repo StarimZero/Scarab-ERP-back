@@ -26,13 +26,19 @@ public class SalesController {
 	@Autowired
 	SalesService service;
 	
-	@PostMapping()
-	public void insert(@RequestBody SalesVO vo) {
+	@PostMapping
+	public void insert(SalesInfoVO vo) {
 		service.insert(vo);
 	}
 	
-	@GetMapping("/list.json")
-	public List<SalesVO> listPage(QueryVO vo) {
+//	@PostMapping
+//	public void insert(@RequestBody SalesVO vo1, @RequestBody SalesInfoVO vo2) {
+//		service.insert12(vo1, vo2);
+//	}
+	
+
+	@GetMapping
+	public List<SalesInfoVO> listPage(QueryVO vo) {
 		return dao.list(vo);
 	}
 	
@@ -42,7 +48,7 @@ public class SalesController {
 	}
 	
 	@PutMapping
-	public void update(@RequestBody SalesVO vo) {
+	public void update(@RequestBody SalesInfoVO vo) {
 		dao.update(vo);
 	}
 	
