@@ -21,16 +21,17 @@ public class PurchaseController {
 	
 	@Autowired
 	PurchaseDAO dao;
+
 	
-	@Autowired
-	PurchaseService service;
-	
-	@PostMapping()
-	public void insert(@RequestBody PurchaseVO vo) {
-		service.insert(vo);
+	@PostMapping
+	public String insert(@RequestBody PurchaseVO vo) {
+		String Purchase_id = dao.getPurchaseID();
+		vo.setPurchase_id(Purchase_id);
+		dao.insert(vo);
+		return Purchase_id;
 	}
 	
-	@GetMapping("/list.json")
+	@GetMapping
 	public List<PurchaseVO> listPage(QueryVO vo) {
 		return dao.list(vo);
 	}

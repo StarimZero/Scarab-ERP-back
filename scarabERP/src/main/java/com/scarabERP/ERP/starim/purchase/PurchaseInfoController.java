@@ -1,5 +1,4 @@
-package com.scarabERP.ERP.starim.sales;
-
+package com.scarabERP.ERP.starim.purchase;
 
 import java.util.List;
 
@@ -15,38 +14,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scarabERP.ERP.common.QueryVO;
 
-@RestController
-@RequestMapping("/erp/sales")
-public class SalesController {
 
+@RestController
+@RequestMapping("/erp/purchase/info")
+public class PurchaseInfoController {
 	
 	@Autowired
-	SalesDAO dao;
-	
+	PurchaseInfoDAO dao;
 	
 	@PostMapping
-	public String insert(@RequestBody SalesVO vo) {
-		String Sales_id = dao.getSaleID();
-		vo.setSales_id(Sales_id);
+	public void insert(@RequestBody PurchaseInfoVO vo) {
 		dao.insert(vo);
-		return Sales_id;
+	}
+	
+	@GetMapping("/{purchase_id}")
+	public List<PurchaseInfoVO> read(@PathVariable("purchase_id") String purchase_id){
+		return dao.read(purchase_id);
 	}
 
+
+	
 	@GetMapping
-	public List<SalesInfoVO> listPage(QueryVO vo) {
+	public List<PurchaseInfoVO> listPage(QueryVO vo) {
 		return dao.list(vo);
 	}
 	
-	@DeleteMapping("/{sales_id}")
-	public void delete(@PathVariable("sales_id") String sales_id) {
-		dao.delete(sales_id);
+	@DeleteMapping("/{purchase_info_id}")
+	public void delete(@PathVariable("purchase_info_id") int purchase_info_id) {
+		dao.delete(purchase_info_id);
 	}
 	
 	@PutMapping
-	public void update(@RequestBody SalesVO vo) {
+	public void update(@RequestBody PurchaseInfoVO vo) {
 		dao.update(vo);
 	}
-	
 
-	
 }

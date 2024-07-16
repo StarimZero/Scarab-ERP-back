@@ -26,7 +26,7 @@ public class SalesInfoDAOImpl implements SalesInfoDAO{
 	}
 
 	@Override
-	public void delete(String sales_info_id) {
+	public void delete(int sales_info_id) {
 		session.delete(namespace + ".delete", sales_info_id);
 		
 	}
@@ -36,5 +36,12 @@ public class SalesInfoDAOImpl implements SalesInfoDAO{
 		session.update(namespace + ".update", vo);
 		
 	}
+
+	@Override
+	public List<SalesInfoVO> read(String sales_id) {
+		return session.selectList(namespace + ".read", sales_id);
+	}
+
+
 
 }
