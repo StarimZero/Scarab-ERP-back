@@ -13,9 +13,9 @@
 		select visitor_id from web_visitor where visitor_email=#{visitor_email}
 	</select>
 	
-	<delete id="delete">
-		delete from web_visitor where visitor_id=#{visitor_id}
-	</delete>
+	<update id="delete">
+		update web_visitor set visitor_state=0 where visitor_id=#{visitor_id}
+	</update>
 	
 	<update id="updatePhoto">
 		update web_visitor set visitor_photo=#{visitor_photo} where visitor_id=#{visitor_id}
