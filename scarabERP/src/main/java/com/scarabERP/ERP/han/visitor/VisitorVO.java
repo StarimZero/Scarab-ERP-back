@@ -12,9 +12,15 @@ public class VisitorVO {
 	private String visitor_email;
 	private String visitor_address1;
 	private String visitor_address2;
+	private int visitor_state;
 	
 	
-	
+	public int getVisitor_state() {
+		return visitor_state;
+	}
+	public void setVisitor_state(int visitor_state) {
+		this.visitor_state = visitor_state;
+	}
 	public String getVisitor_id() {
 		return visitor_id;
 	}
@@ -77,6 +83,7 @@ public class VisitorVO {
 		return "VisitorVO [visitor_id=" + visitor_id + ", visitor_pass=" + visitor_pass + ", visitor_name="
 				+ visitor_name + ", visitor_birthday=" + visitor_birthday + ", visitor_phone=" + visitor_phone
 				+ ", visitor_photo=" + visitor_photo + ", visitor_email=" + visitor_email + ", visitor_address1="
-				+ visitor_address1 + ", visitor_address2=" + visitor_address2 + "]";
+				+ visitor_address1 + ", visitor_address2=" + visitor_address2 + ", visitor_state=" + visitor_state
+				+ "]";
 	}
 }
