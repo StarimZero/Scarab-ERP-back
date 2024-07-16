@@ -22,7 +22,7 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 
 	@Override
-	public void insert(SalesInfoVO vo) {
+	public void insert(SalesVO vo) {
 		session.insert(namespace + ".insert", vo);
 	}
 
@@ -38,7 +38,7 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 
 	@Override
-	public void update(SalesInfoVO vo) {
+	public void update(SalesVO vo) {
 		session.update(namespace + ".update", vo);
 		
 	}

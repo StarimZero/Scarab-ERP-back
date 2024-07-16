@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.han.InventoryMapper">
+	
+	<select id="listAll" resultType="com.scarabERP.ERP.han.inventory.InventoryVO"> 
+		select * from inventory_view group by items_id
+	</select>
+	
+	
+	<select id="listByWarehouse" resultType="com.scarabERP.ERP.han.inventory.InventoryVO">
+		select * from inventory_view where warehouse_id=#{warehouse_id}
+	</select>
+	
+	
+	<select id="listRecent" resultType="com.scarabERP.ERP.han.inventory.TradeVO"> 
+		select * from trade_view where items=#{item}
+		order by date desc limit 10
+	</select>
+	
+	
+	
+	<select id="listAlltrade" resultType="com.scarabERP.ERP.han.inventory.TradeVO">
+		select * from trade_view
+		order by date desc;
+	</select>
+</mapper>

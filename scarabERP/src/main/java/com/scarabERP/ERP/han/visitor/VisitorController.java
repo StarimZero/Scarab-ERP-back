@@ -43,22 +43,23 @@ public class VisitorController {
 	
 	@PostMapping("/login")
 	public int login(@RequestBody VisitorVO vo) {
-		//아이디 미입력 or 아이디 틀림 (0 리턴)
-		//아이디 맞고 비번 틀림 (2 리턴)
-		//아이디 맞고 비번도 맞음 (1 리턴 - 로그인성공)
-		int result=0;
-		VisitorVO visitor = dao.login(vo.getVisitor_id());
-		if(visitor != null){
-			//암호화된 비번 비교
-			if(encoder.matches(vo.getVisitor_pass(), visitor.getVisitor_pass())){
-			
-			//비암호화 비번 비교
-			//if(vo.getVisitor_pass().equals(visitor.getVisitor_pass())) {
-				result=1;
-			}else{
-				result=2;
-			}
-		}
+	    int result = 0;
+	    VisitorVO visitor = dao.login(vo.getVisitor_id());
+	    if (visitor != null) {
+	        if (visitor.getVisitor_state() == 0) {
+	            result = 3; // 탈퇴한 회원 0 리턴
+	        } else {
+	            // 암호화비번 검증
+	            if (encoder.matches(vo.getVisitor_pass(), visitor.getVisitor_pass())) {
+	                result = 1; // 로그인 성공 1 리턴
+	            } else {
+	                result = 2; // 비밀번호 틀림 2 리턴
+	            }
+	        }
+	    } else {
+	        // 아이디 미입력 or 아이디 틀림 0리턴
+	        result = 0;
+	    }
 		System.out.println(visitor);
 		return result;
 	}
@@ -86,25 +87,27 @@ public class VisitorController {
 	}
 	
 	@PostMapping("/updatePhoto")
-	public void updatePhoto(@RequestParam("visitor_id") String visitor_id, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-		//파일업로드
-		MultipartFile file = multi.getFile("byte");
-		String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/visitor/";
-		String fileName = visitor_id + ".jpg";
-		File oldFile = new File(filePath + fileName);
-		if(oldFile.exists()) {
-			oldFile.delete();
-		}else {
-			//이미지업로드한걸로 업데이트
-			VisitorVO vo = new VisitorVO();
-			vo.setVisitor_id(visitor_id);
-			vo.setVisitor_photo("/display?file=" + filePath + fileName);
-			dao.updatePhoto(vo);
-		}
-		file.transferTo(new File("c:" + filePath + fileName));
-	}
+    public void updatePhoto(@RequestParam("visitor_id") String visitor_id, 
+                            @RequestParam("visitor_photo") MultipartFile file) throws IllegalStateException, IOException {
+        //파일업로드
+        String filePath = "C:/team/Scarab-ERP-front/public/images/visitor/";
+        String fileName = visitor_id + ".jpg";
+        File oldFile = new File(filePath + fileName);
+
+        if (oldFile.exists()) {
+            oldFile.delete();
+        }
+
+        file.transferTo(new File(filePath + fileName));
+
+        //이미지업로드한걸로 업데이트
+        VisitorVO vo = new VisitorVO();
+        vo.setVisitor_id(visitor_id);
+        vo.setVisitor_photo("/display?file=" + filePath + fileName);
+        dao.updatePhoto(vo);
+    }
 	
-	@DeleteMapping("/delete/{visitor_id}")
+	@PutMapping("/delete/{visitor_id}")
 	public void delete(@PathVariable("visitor_id") String visitor_id) {
 		dao.delete(visitor_id);
 	}

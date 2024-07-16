@@ -8,12 +8,12 @@
 	 	{call getPurchaseId()}
 	 </select>
 	 <insert id="insert">
-	 	insert into erp_purchase (purchase_id, purchase_items_id, purchase_qnt, purchase_employee, purchase_location, purchase_date, purchase_warehouse, purchase_price) values(#{purchase_id}, #{purchase_items_id}, #{purchase_qnt}, #{purchase_employee}, #{purchase_location}, #{purchase_date}, #{purchase_warehouse}, #{purchase_price} )
+	 	insert into erp_purchase (purchase_id, purchase_employee, purchase_location, purchase_date) values(#{purchase_id}, #{purchase_employee}, #{purchase_location}, #{purchase_date} )
 	 </insert>
 	 <delete id="delete">
 	 	delete from erp_purchase where purchase_id = #{purchase_id}
 	 </delete>
 	 <update id="update">
-		update erp_purchase set purchase_date=#{purchase_date}, purchase_warehouse=#{purchase_warehouse}, purchase_price=#{purchase_price}, purchase_qnt=#{purchase_qnt}, purchase_employee=#{purchase_employee}, purchase_location=#{purchase_location} where purchase_id = #{purchase_id}
+		update erp_purchase set purchase_date=#{purchase_date}, purchase_employee=#{purchase_employee}, purchase_location=#{purchase_location} where purchase_id = #{purchase_id}
 	</update>
 </mapper>
