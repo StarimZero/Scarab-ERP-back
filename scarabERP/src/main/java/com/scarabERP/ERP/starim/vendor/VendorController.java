@@ -32,14 +32,14 @@ public class VendorController {
 		dao.insert(vo);
 	}
 	
-	@DeleteMapping("/{client_id}")
-	public void delete(@PathVariable("client_id") int client_id) {
-		dao.delete(client_id);
+	@DeleteMapping("/{vendor_id}")
+	public void delete(@PathVariable("vendor_id") int vendor_id) {
+		dao.delete(vendor_id);
 	}
 	
 	@GetMapping("/{client_id}")
-	public VendorVO read(@PathVariable("client_id") int client_id) {
-		return dao.read(client_id);
+	public VendorVO read(@PathVariable("vendor_id") int vendor_id) {
+		return dao.read(vendor_id);
 	}
 	
 	@PutMapping

@@ -9,7 +9,7 @@ public interface SalesDAO {
 	public String getSaleID();
 	
 	//판매 등록하기
-	public void insert(SalesInfoVO vo);
+	public void insert(SalesVO vo);
 	
 	//판매 리스트
 	public List<SalesInfoVO> list(QueryVO vo);
@@ -18,5 +18,5 @@ public interface SalesDAO {
 	public void delete(String sales_id);
 	
 	//판매 수정하기
-	public void update(SalesInfoVO vo);
+	public void update(SalesVO vo);
 }

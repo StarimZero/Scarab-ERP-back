@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarabERP.ERP.common.QueryVO;
+import com.scarabERP.ERP.starim.items.ItemsVO;
 
 @RestController
 @RequestMapping("/erp/sales/info")
@@ -27,13 +28,20 @@ public class SalesInfoController {
 		dao.insert(vo);
 	}
 	
+	@GetMapping("/{sales_id}")
+	public List<SalesInfoVO> read(@PathVariable("sales_id") String sales_id){
+		return dao.read(sales_id);
+	}
+
+
+	
 	@GetMapping
 	public List<SalesInfoVO> listPage(QueryVO vo) {
 		return dao.list(vo);
 	}
 	
-	@DeleteMapping("/{sales_id}")
-	public void delete(@PathVariable("sales_info_id") String sales_info_id) {
+	@DeleteMapping("/{sales_info_id}")
+	public void delete(@PathVariable("sales_info_id") int sales_info_id) {
 		dao.delete(sales_info_id);
 	}
 	
