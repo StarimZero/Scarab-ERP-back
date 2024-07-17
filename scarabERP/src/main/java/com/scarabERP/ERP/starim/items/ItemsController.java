@@ -2,6 +2,7 @@ package com.scarabERP.ERP.starim.items;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,22 @@ public class ItemsController {
 	
 	@GetMapping("/list.json")
 	public List<ItemsVO> listPage(QueryVO vo) {
-		return dao.list(vo);
+		return dao.listpage(vo);
 	}
 	
+	@GetMapping
+	public HashMap<String, Object> list(QueryVO vo){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", dao.total(vo));
+		map.put("documents", dao.list(vo));
+		return map;
+	}
 	
 	@PostMapping
-	public void insert(@RequestBody ItemsVO vo) {
+	public String insert(@RequestBody ItemsVO vo) {
 		dao.insert(vo);
+		String items_id = vo.getItems_id();
+		return items_id;
 	}
 	
 	@DeleteMapping("/{items_id}")
@@ -97,22 +107,6 @@ public class ItemsController {
 	}
 	
 	
-	@PostMapping("/1")
-	public void insert1(ItemsVO vo,  MultipartHttpServletRequest multi)throws Exception{
-		
-		MultipartFile file= multi.getFile("byte");
-		if(file.isEmpty()) {
-			System.out.println("file.........."+ file.getOriginalFilename());
-			//파일업로드
-			String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/items/";
-			String fileName = vo.getItems_id() + ".jpg";
-				//이미지업로드한걸로 업데이트
-				ItemsVO item = new ItemsVO();
-				vo.setItems_photo("/display?file=" + filePath + fileName);
-				dao.insert(item);
-			file.transferTo(new File("c:" + filePath + fileName));
-		}
-	}
 
 	
 	
