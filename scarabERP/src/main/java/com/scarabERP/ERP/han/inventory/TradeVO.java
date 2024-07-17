@@ -4,12 +4,25 @@ public class TradeVO {
 	private String type;
 	private int trade_id;
 	private String item;
+	private String item_name;
 	private int qnt;
 	private int price;
 	private String date;
 	private int warehouse;
+	private String warehouse_name;
 	
-	
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public String getWarehouse_name() {
+		return warehouse_name;
+	}
+	public void setWarehouse_name(String warehouse_name) {
+		this.warehouse_name = warehouse_name;
+	}
 	public String getType() {
 		return type;
 	}
@@ -56,7 +69,8 @@ public class TradeVO {
 	
 	@Override
 	public String toString() {
-		return "TradeVO [type=" + type + ", trade_id=" + trade_id + ", item=" + item + ", qnt=" + qnt + ", price="
-				+ price + ", date=" + date + ", warehouse=" + warehouse + "]";
+		return "TradeVO [type=" + type + ", trade_id=" + trade_id + ", item=" + item + ", item_name=" + item_name
+				+ ", qnt=" + qnt + ", price=" + price + ", date=" + date + ", warehouse=" + warehouse
+				+ ", warehouse_name=" + warehouse_name + "]";
 	}
 }
