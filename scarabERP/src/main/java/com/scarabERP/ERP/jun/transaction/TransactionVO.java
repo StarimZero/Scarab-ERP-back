@@ -2,33 +2,31 @@ package com.scarabERP.ERP.jun.transaction;
 
 import java.util.Date;
 
-import com.scarabERP.ERP.jun.account.AccountVO;
-import com.scarabERP.ERP.jun.member.MemberVO;
-import com.scarabERP.ERP.starim.client.ClientVO;
-import com.scarabERP.ERP.starim.vendor.VendorVO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class TransactionVO {
 	private int transaction_id;
+	private String account_number;
 	private int transaction_deposit;
 	private int transaction_withdraw;
 	private Date transaction_date;
+	private String member_info_key;
+	private int client_id;
+	private int vendor_id;
 	
-	private AccountVO accountVO;
-	private MemberVO memberVO;
-	private ClientVO clientVO;
-	private VendorVO vendorVO;
 	
 	public TransactionVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public TransactionVO(AccountVO accountVO, MemberVO memberVO, ClientVO clientVO, VendorVO vendorVO) {
-		super();
-		this.accountVO = accountVO;
-		this.memberVO = memberVO;
-		this.clientVO = clientVO;
-		this.vendorVO = vendorVO;
+	
+	@Override
+	public String toString() {
+		return "TransactionVO [transaction_id=" + transaction_id + ", account_number=" + account_number
+				+ ", transaction_deposit=" + transaction_deposit + ", transaction_withdraw=" + transaction_withdraw
+				+ ", transaction_date=" + transaction_date + ", member_info_key=" + member_info_key + ", client_id="
+				+ client_id + ", vendor_id=" + vendor_id + "]";
 	}
 
 	public int getTransaction_id() {
@@ -40,7 +38,6 @@ public class TransactionVO {
 	public int getTransaction_deposit() {
 		return transaction_deposit;
 	}
-
 	public void setTransaction_deposit(int transaction_deposit) {
 		this.transaction_deposit = transaction_deposit;
 	}
@@ -57,29 +54,27 @@ public class TransactionVO {
 		this.transaction_date = transaction_date;
 	}
 	public String getAccount_number() {
-        return accountVO.getAccount_number();
-    }
-    public void setAccount_number(String account_number) {
-        accountVO.setAccount_number(account_number);
-    }
-    public String getMember_info_key() {
-        return memberVO.getMember_info_key();
-    }
-    public void setMember_info_key(String member_info_key) {
-        memberVO.setMember_info_key(member_info_key);
-    }
-    public int getClient_id() {
-        return clientVO.getClient_id();
-    }
-    public void setClient_id(int client_id) {
-        clientVO.setClient_id(client_id);
-    }
-    public int getVendor_id() {
-        return vendorVO.getVendor_id();
-    }
-    public void setVendor_id(int vendor_id) {
-        vendorVO.setVendor_id(vendor_id);
-    }
-	
-	
+		return account_number;
+	}
+	public void setAccount_number(String account_number) {
+		this.account_number = account_number;
+	}
+	public String getMember_info_key() {
+		return member_info_key;
+	}
+	public void setMember_info_key(String member_info_key) {
+		this.member_info_key = member_info_key;
+	}
+	public int getClient_id() {
+		return client_id;
+	}
+	public void setClient_id(int client_id) {
+		this.client_id = client_id;
+	}
+	public int getVendor_id() {
+		return vendor_id;
+	}
+	public void setVendor_id(int vendor_id) {
+		this.vendor_id = vendor_id;
+	}
 }

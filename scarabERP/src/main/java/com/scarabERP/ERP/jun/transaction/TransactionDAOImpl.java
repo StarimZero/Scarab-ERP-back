@@ -34,7 +34,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 	
 	@Override
-	public TransactionVO read(int transaction_id) {
+	public HashMap<String, Object> read(int transaction_id) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".read", transaction_id);
 	}
