@@ -23,6 +23,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
+	public List<NoticeVO> listpage(QueryVO vo) {
+		return session.selectList(namespace + ".listpage", vo);
+	}
+	
+	@Override
 	public int total(QueryVO vo) {
 		return session.selectOne(namespace + ".total", vo);
 	}
@@ -68,9 +73,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 	}
 
-	@Override
-	public List<NoticeVO> listpage(QueryVO vo) {
-		return session.selectList(namespace + ".listpage", vo);
-	}
+
 
 }

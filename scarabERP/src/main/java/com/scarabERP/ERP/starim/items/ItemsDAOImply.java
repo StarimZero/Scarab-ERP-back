@@ -20,6 +20,16 @@ public class ItemsDAOImply implements ItemsDAO {
 	public List<ItemsVO> list(QueryVO vo) {
 		return session.selectList(namespace + ".list", vo);
 	}
+	
+	@Override
+	public List<ItemsVO> listpage(QueryVO vo) {
+		return session.selectList(namespace + ".listpage", vo);
+	}
+	
+	@Override
+	public int total(QueryVO vo) {
+		return session.selectOne(namespace + ".total", vo);
+	}
 
 
 	@Override
@@ -62,5 +72,8 @@ public class ItemsDAOImply implements ItemsDAO {
 		session.insert(namespace + ".insertPhoto", vo);
 		
 	}
+
+
+
 
 }

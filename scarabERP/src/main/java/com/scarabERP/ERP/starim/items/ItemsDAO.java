@@ -6,8 +6,12 @@ import com.scarabERP.ERP.common.QueryVO;
 import com.scarabERP.ERP.starim.warehouse.WareHouseVO;
 
 public interface ItemsDAO {
-	//아이템 목록들고오기
+	//아이템 목록페이지네이션
 	public List<ItemsVO> list(QueryVO vo);
+	//아이템 목록전체
+	public List<ItemsVO> listpage(QueryVO vo);
+	//토탈구하는거
+	public int total(QueryVO vo);
 	//물품 등록하기
 	public void insert(ItemsVO vo);
 	//물품삭제하기
