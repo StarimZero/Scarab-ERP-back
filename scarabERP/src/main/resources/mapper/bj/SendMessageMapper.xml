@@ -47,20 +47,8 @@
 
     <select id="total" resultType="int">
         select count(*) 
-        FROM erp_send_message
-        <if test="key == 'message_id'">
-          where message_id like #{word}
-        </if>
-        <if test="key == 'message_receiver'">
-           where message_receiver like #{word}
-        </if>
-        <if test="key == 'message_sender'">
-           where message_sender like #{word}
-        </if>
-        <if test="key == 'message_title'">
-           where message_title like #{word}
-        </if>
-
+       from erp_send_message
+		
     </select>
     
     

@@ -5,23 +5,41 @@
 	<select id="list" resultType="hashmap">
 			select m.* ,u.member_info_id
 			from erp_receive_message m, erp_member_info u 
-			where message_receiver = #{message_receiver} and u.member_info_id=m.message_receiver and message_state=0
+			where m.message_receiver = #{message_receiver} and u.member_info_id=m.message_receiver and m.message_state=0
 		<if test="key == 'message_content'">
-          where message_content like #{word}
+          and m.message_content like #{word}
         </if>
         <if test="key == 'message_receiver'">
-           where message_receiver like #{word}
+           and m.message_receiver like #{word}
         </if>
         <if test="key == 'message_sender'">
-           where message_sender like #{word}
+           and m.message_sender like #{word}
         </if>
         <if test="key == 'message_title'">
-           where message_title like #{word};
+           and m.message_title like #{word}
         </if>
 			ORDER BY message_id DESC
         	LIMIT #{query.start}, #{query.size}
 	</select>
 	
+	
+	  <select id="total" resultType="int">
+         select count(*)
+     	from erp_receive_message
+   		 <if test="key == 'message_content'">
+          and m.message_content like #{word}
+        </if>
+        <if test="key == 'message_receiver'">
+           and m.message_receiver like #{word}
+        </if>
+        <if test="key == 'message_sender'">
+           and m.message_sender like #{word}
+        </if>
+        <if test="key == 'message_title'">
+           and m.message_title like #{word}
+        </if>
+
+    </select>
 	
 	
 		
@@ -66,24 +84,7 @@
     </select>
 
 
-    <select id="total" resultType="int">
-        select count(*) 
-        FROM erp_receive_message
-        where message_state=0
-        <if test="key == 'message_id'">
-          where message_id like #{word}
-        </if>
-        <if test="key == 'message_receiver'">
-           where message_receiver like #{word}
-        </if>
-        <if test="key == 'message_sender'">
-           where message_sender like #{word}
-        </if>
-        <if test="key == 'message_title'">
-           where message_title like #{word};
-        </if>
-
-    </select>
+  
     
     <update id="resetState">
 		update erp_receive_message
