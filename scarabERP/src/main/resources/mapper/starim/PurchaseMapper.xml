@@ -2,8 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scarabERP.ERP.mapper.PurchaseMapper">
 	 <select id="list" resultType="com.scarabERP.ERP.starim.purchase.PurchaseVO">
-	 	select * from erp_purchase;
+	 	select * from view_purchase
+	 	<where>
+			<if test="key=='member_info_name'">
+				member_info_name like #{word} 
+			</if>
+			<if test="key=='purchase_employee'">
+				purchase_employee like #{word} 
+			</if>
+			<if test="key=='purchase_id'">
+				purchase_id like #{word}
+			</if>
+			<if test="key=='purchase_date'">
+				purchase_date like #{word}
+			</if>
+		</where>
+		limit #{start}, #{size};
 	 </select>
+ 	<select id ="total" resultType="int">
+ 		select count(*) from view_purchase
+ 		<if test="key=='member_info_name'">
+			where member_info_name like #{word}	
+		</if>
+		<if test="key=='purchase_employee'">
+			where purchase_employee like #{word}
+		</if>
+		<if test="key=='purchase_date'">
+			where purchase_date like #{word}
+		</if>
+	</select>
 	 <select id="getPurchaseID" resultType="string" statementType="CALLABLE">
 	 	{call getPurchaseId()}
 	 </select>

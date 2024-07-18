@@ -1,10 +1,10 @@
 package com.scarabERP.ERP.han.inventory;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,47 +19,47 @@ public class InventoryController {
 	InventoryDAO dao;
 	
 	@GetMapping("/listAll")
-	public List<InventoryVO> listAll(QueryVO vo){
-		return dao.listAll(vo);
-	}
-	@GetMapping("/listAllTotal")
-	public int listAllTotal() {
-		return dao.listAllTotal();
+	public HashMap<String, Object> listAll(QueryVO vo){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("count", dao.listAllCount(vo));
+		map.put("documents", dao.listAll(vo));
+		return map;
 	}
 	
 	
 	@GetMapping("/listByWarehouse/{warehouse}")
-	public List<InventoryVO> listByWarehouse(
-			@RequestParam(defaultValue="1") int page,
-			@RequestParam(defaultValue="5") int size,
-			@RequestParam int warehouse_id){
-		int start = (page-1) * size;
-		QueryVO vo = new QueryVO();
-		vo.setPage(page);
-		vo.setSize(size);
-		vo.setStart(start);
-	    List<InventoryVO> result = dao.listByWarehouse(vo, warehouse_id);
-		return result;
-	}
-	@GetMapping("/listByWarehouseTotal/{warehouse}")
-	public int listByWarehouseTotal(@RequestParam int warehouse_id) {
-		return dao.listByWarehouseTotal(warehouse_id);
+	public HashMap<String, Object> listByWarehouse(QueryVO vo,
+			@PathVariable("warehouse") int warehouse_id){
+		System.out.println("검색어는!!!!!!!!!!!!!!" + vo);
+		String key = vo.getKey();
+		System.out.println("검색키워드는!!!!!!!!!!!!" + key);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("count", dao.listByWarehouseCount(vo, warehouse_id));
+		map.put("documents", dao.listByWarehouse(vo, warehouse_id));
+		return map;
 	}
 	
 	
-	@GetMapping("/listRecent")
-	public List<TradeVO> listRecent(@RequestParam String item, @RequestParam int warehouse){
+	@GetMapping("/listRecent/{item}&{warehouse}")
+	public List<TradeVO> listRecent(@PathVariable("item") String item, @PathVariable("warehouse") int warehouse){
 		return dao.listRecent(item, warehouse);
 	}
 	
 	
 	
 	@GetMapping("/listAlltrade")
-	public List<TradeVO> listAlltrade(QueryVO vo){
-		return dao.listAlltrade(vo);
+	public HashMap<String, Object> listAlltrade(QueryVO vo){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("count", dao.listAlltradeCount(vo));
+		map.put("documents", dao.listAlltrade(vo));
+		return map;
 	}
-	@GetMapping("/listAlltradeTotal")
-	public int listAlltradeTotal() {
-		return dao.listAlltradeTotal();
+	
+	
+	
+	@GetMapping("/restqnt/{item}")
+	public List<InventoryVO> restqnt(@PathVariable("item") String items_id){
+		System.out.println("받은 데이터는~~~~" + items_id);
+		return dao.restqnt(items_id);
 	}
 }

@@ -1,6 +1,7 @@
 package com.scarabERP.ERP.starim.sales;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,11 @@ public class SalesController {
 	}
 
 	@GetMapping
-	public List<SalesInfoVO> listPage(QueryVO vo) {
-		return dao.list(vo);
+	public HashMap<String, Object> listPage(QueryVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", dao.total(vo));
+		map.put("documents", dao.list(vo));
+		return map;
 	}
 	
 	@DeleteMapping("/{sales_id}")

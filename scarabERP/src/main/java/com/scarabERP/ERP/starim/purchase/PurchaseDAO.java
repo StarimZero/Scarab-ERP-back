@@ -11,6 +11,9 @@ public interface PurchaseDAO {
 	//구매 등록하기
 	public void insert(PurchaseVO vo);
 	
+	//토탈구하는거
+	public int total(QueryVO vo);
+	
 	//구매 리스트
 	public List<PurchaseVO> list(QueryVO vo);
 	
