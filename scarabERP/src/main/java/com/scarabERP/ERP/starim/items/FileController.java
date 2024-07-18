@@ -25,20 +25,12 @@ public class FileController {
 		 try {
 		        // URL 디코딩을 통해 공백을 처리하고, 역슬래시를 슬래시로 변환
 		        String filePath = URLDecoder.decode(file, StandardCharsets.UTF_8.name()).replace("\\", "/");
-		        
 		        // 파일 시스템 리소스 경로 설정
 		        String absolutePath = "c:" + filePath;
 		        Resource resource = new FileSystemResource(absolutePath);
-
-		        // 파일이 존재하지 않으면 404 에러 반환
-		        if (!resource.exists()) {
-		            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		        }
-
 		        // 파일의 MIME 타입 추출하여 설정
 		        HttpHeaders headers = new HttpHeaders();
 		        headers.add("Content-Type", Files.probeContentType(Paths.get(absolutePath)));
-
 		        // 이미지 파일 반환
 		        return ResponseEntity.ok()
 		                             .headers(headers)

@@ -8,6 +8,16 @@ public class PurchaseVO {
 	private String purchase_employee;
 	private int purchase_location;
 	private Date purchase_date;
+	private String member_info_name;
+	
+	
+	
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
+	}
 	public String getPurchase_id() {
 		return purchase_id;
 	}
