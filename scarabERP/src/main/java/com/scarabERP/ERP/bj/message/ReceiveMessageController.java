@@ -30,7 +30,7 @@ public class ReceiveMessageController {
 		
 	}
 	
-	@GetMapping("/list/{message_receiver}") // erp/receivemessage/list/kiin?pag=1&size=100
+	@GetMapping("/list/{message_receiver}") // erp/receivemessage/list/kiin?page=1&size=100
 	public HashMap<String, Object> list(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("total", dao.total(vo));

@@ -3,7 +3,9 @@ package com.scarabERP.ERP.bj.bbs;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +44,7 @@ public class EmployBBSController {
 		return dao.listtable(vo);
 	}
 	
-	@PostMapping("/delete/{employ_bbs_id}")
+	@DeleteMapping("/{employ_bbs_id}")
 	public void delete(@PathVariable("employ_bbs_id") int employ_bbs_id) {
 		dao.delete(employ_bbs_id);
 	}
@@ -52,7 +54,7 @@ public class EmployBBSController {
 		return service.read(employ_bbs_id);
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public void update(@RequestBody EmployBBSVO vo) {
 		dao.update(vo);
 	}
