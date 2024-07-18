@@ -13,7 +13,7 @@
 	
 	<select id="listByWarehouse" resultType="com.scarabERP.ERP.han.inventory.InventoryVO">
 		select * from inventory_view where warehouse_id=#{warehouse_id}
-		limit #{start}, #{size}
+		limit #{vo.start}, #{vo.size}
 	</select>
 	<select id="listByWarehouseTotal" resultType="int">
 		select count(*) from inventory_view where warehouse_id=#{warehouse_id}	
