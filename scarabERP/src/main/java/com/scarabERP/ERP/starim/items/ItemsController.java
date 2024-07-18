@@ -88,22 +88,38 @@ public class ItemsController {
 	}
 	
 	@PostMapping("/update/image/{items_id}")
-	public void updateImage(@PathVariable("items_id") String items_id, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-		//파일업로드
-		MultipartFile file = multi.getFile("byte");
-		String filePath = "/Scarab ERP/Scarab-ERP-front/public/images/items/";
-		String fileName = items_id + ".jpg";
-		File oldFile = new File(filePath + fileName);
-		if(oldFile.exists()) {
-			oldFile.delete();
-		}else {
-			//이미지업로드한걸로 업데이트
-			ItemsVO vo = new ItemsVO();
-			vo.setItems_id(items_id);
-			vo.setItems_photo("/display?file=" + filePath + fileName);
-			dao.updatePhoto(vo);
+	public void updateImage(@PathVariable("items_id") String items_id, MultipartHttpServletRequest multi){
+		try {
+			String relativePath = "public/images/items/";
+			String currentDir = System.getProperty("user.dir");
+			String uploadPath = currentDir + File.separator + relativePath;
+
+			File folder = new File(uploadPath);
+			if (!folder.exists()) {
+				folder.mkdirs(); // 폴더가 없으면 모든 부모 디렉토리까지 생성
+			}
+
+			MultipartFile file = multi.getFile("byte");
+			if (file != null && !file.isEmpty()) {
+				String fileName = items_id + ".jpg";
+				File destFile = new File(uploadPath, fileName);
+				file.transferTo(destFile);
+				System.out.println("Uploaded file: " + fileName);
+				File oldFile = new File(destFile + fileName);
+				if(oldFile.exists()) {
+					oldFile.delete();
+				}
+				// 이미지 경로 설정 및 DB 삽입
+				ItemsVO vo = new ItemsVO();
+				vo.setItems_id(items_id);
+				vo.setItems_photo("/display?file=" + relativePath + fileName);
+				dao.updatePhoto(vo);
+			} else {
+				System.out.println("No file uploaded or file is empty");
+			}
+		} catch (Exception e) {
+			System.out.println("Attach 파일 업로드 오류: " + e.toString());
 		}
-		file.transferTo(new File("c:" + filePath + fileName));
 	}
 	
 	
