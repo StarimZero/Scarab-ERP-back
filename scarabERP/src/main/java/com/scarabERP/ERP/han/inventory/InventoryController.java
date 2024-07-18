@@ -30,9 +30,9 @@ public class InventoryController {
 	
 	@GetMapping("/listByWarehouse/{warehouse}")
 	public List<InventoryVO> listByWarehouse(
-			@RequestParam(defaultValue="1") int page,
-			@RequestParam(defaultValue="5") int size,
-			@RequestParam int warehouse_id){
+			@RequestParam("page") int page,
+			@RequestParam("size") int size,
+			@PathVariable("warehouse") int warehouse_id){
 		int start = (page-1) * size;
 		QueryVO vo = new QueryVO();
 		vo.setPage(page);
@@ -42,7 +42,7 @@ public class InventoryController {
 		return result;
 	}
 	@GetMapping("/listByWarehouseTotal/{warehouse}")
-	public int listByWarehouseTotal(@RequestParam int warehouse_id) {
+	public int listByWarehouseTotal(@PathVariable("warehouse") int warehouse_id) {
 		return dao.listByWarehouseTotal(warehouse_id);
 	}
 	
