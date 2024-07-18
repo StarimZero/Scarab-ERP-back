@@ -98,7 +98,6 @@ public class ItemsController {
 			if (!folder.exists()) {
 				folder.mkdirs(); // 폴더가 없으면 모든 부모 디렉토리까지 생성
 			}
-
 			MultipartFile file = multi.getFile("byte");
 			if (file != null && !file.isEmpty()) {
 				String fileName = items_id + ".jpg";

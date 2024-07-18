@@ -10,6 +10,17 @@ public class VendorVO {
 	private int vendor_credit_limit;
 	private String vendor_fax;
 	private String vendor_email;
+	private String member_info_name;
+	
+	
+	
+	
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
+	}
 	public int getVendor_id() {
 		return vendor_id;
 	}

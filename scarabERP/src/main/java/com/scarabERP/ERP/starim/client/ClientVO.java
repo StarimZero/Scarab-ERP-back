@@ -10,6 +10,16 @@ public class ClientVO {
 	private int client_credit_limit;
 	private String client_fax;
 	private String client_email;
+	private String member_info_name;
+	
+	
+	
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
+	}
 	public int getClient_id() {
 		return client_id;
 	}
