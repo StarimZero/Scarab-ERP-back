@@ -3,35 +3,123 @@
 <mapper namespace="com.example.mapper.han.InventoryMapper">
 	
 	<select id="listAll" resultType="com.scarabERP.ERP.han.inventory.InventoryVO"> 
-		select * from inventory_view group by items_id
+		select * from inventory_view
+		<where>
+			<if test="key=='items_id'">
+				items_id like #{word} 
+			</if>
+			<if test="key=='items_name'">
+				items_name like #{word} 
+			</if>
+			<if test="key=='items_type'">
+				items_type like #{word}
+			</if>
+		</where>	
+		group by items_id
 		limit #{start}, #{size}
 	</select>
-	<select id="listAllTotal" resultType="int">
-		select count(*) from (select items_id from inventory_view group by items_id) as grouped;
+	<select id="listAllCount" resultType="int">
+		select count(*) from (select items_id from inventory_view
+		<where>
+			<if test="key=='items_id'">
+				items_id like #{word} 
+			</if>
+			<if test="key=='items_name'">
+				items_name like #{word} 
+			</if>
+			<if test="key=='items_type'">
+				items_type like #{word}
+			</if>
+		</where>
+		group by items_id) as grouped;
 	</select>
+	
 	
 	
 	<select id="listByWarehouse" resultType="com.scarabERP.ERP.han.inventory.InventoryVO">
-		select * from inventory_view where warehouse_id=#{warehouse_id}
+		select * from inventory_view
+		where warehouse_id=#{warehouse_id}
+			<if test="vo.key=='items_id'">
+				and items_id like #{vo.word} 
+			</if>
+			<if test="vo.key=='items_name'">
+				and items_name like #{vo.word} 
+			</if>
+			<if test="vo.key=='items_type'">
+				and items_type like #{vo.word}
+			</if>
 		limit #{vo.start}, #{vo.size}
 	</select>
-	<select id="listByWarehouseTotal" resultType="int">
-		select count(*) from inventory_view where warehouse_id=#{warehouse_id}	
+	<select id="listByWarehouseCount" resultType="int">
+		select count(*) from inventory_view
+		where warehouse_id=#{warehouse_id}
+			<if test="vo.key=='items_id'">
+				and items_id like #{vo.word} 
+			</if>
+			<if test="vo.key=='items_name'">
+				and items_name like #{vo.word} 
+			</if>
+			<if test="vo.key=='items_type'">
+				and items_type like #{vo.word}
+			</if>
 	</select>
+	 
+	
+	
+	
 	
 	
 	<select id="listRecent" resultType="com.scarabERP.ERP.han.inventory.TradeVO"> 
-		select * from trade_view where items=#{item}
+		select * from trade_view where item=#{item}
+		<if test="warehouse!=null">
+			and warehouse=#{warehouse}
+		</if>
+
 		order by date desc limit 10
 	</select>
 	
 	
 	
 	<select id="listAlltrade" resultType="com.scarabERP.ERP.han.inventory.TradeVO">
-		select * from trade_view order by date desc
+		select * from trade_view 
+		<where>
+			<if test="key=='date'">
+				date like #{word}
+			</if>
+			<if test="key=='type'">
+				type like #{word} 
+			</if>
+			<if test="key=='item_name'">
+				item_name like #{word}
+			</if>
+			<if test="key=='warehouse_name'">
+				warehouse_name like #{word}
+			</if>
+		</where>
+		order by date desc
 		limit #{start}, #{size}
 	</select>
-	<select id="listAlltradeTotal" resultType="int">
+	<select id="listAlltradeCount" resultType="int">
 		select count(*) from trade_view
+		<where>
+			<if test="key=='date'">
+				date like #{word}
+			</if>
+			<if test="key=='type'">
+				type like #{word} 
+			</if>
+			<if test="key=='item_name'">
+				item_name like #{word}
+			</if>
+			<if test="key=='warehouse_name'">
+				warehouse_name like #{word}
+			</if>
+		</where>
+	</select>
+	
+	
+	
+	<select id="restqnt" resultType="com.scarabERP.ERP.han.inventory.InventoryVO">
+		select * from inventory_view where items_id = #{items_id}
 	</select>
 </mapper>
