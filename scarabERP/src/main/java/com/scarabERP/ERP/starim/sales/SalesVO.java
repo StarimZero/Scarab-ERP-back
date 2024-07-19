@@ -10,7 +10,7 @@ public class SalesVO {
 	private String sales_location;
 	private String sales_date;
 	private String member_info_name;
-
+	private int sales_type;
 	
 	
 	
@@ -44,6 +44,12 @@ public class SalesVO {
 	}
 	public void setSales_date(String sales_date) {
 		this.sales_date = sales_date;
+	}
+	public int getSales_type() {
+		return sales_type;
+	}
+	public void setSales_type(int sales_type) {
+		this.sales_type = sales_type;
 	}
 	@Override
 	public String toString() {

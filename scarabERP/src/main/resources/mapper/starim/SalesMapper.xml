@@ -44,6 +44,21 @@
 	 	delete from erp_sales where sales_id = #{sales_id}
 	 </delete>
 	 <update id="update">
-		update erp_sales set sales_date=#{sales_date}, sales_employee=#{sales_employee}, sales_location=#{sales_location} where sales_id = #{sales_id}
+		update erp_sales 
+		<set>
+			<if test="sales_date != null">
+		 		sales_date=#{sales_date}, 
+		 	</if>
+		 	<if test="sales_employee != null">
+		 		sales_employee=#{sales_employee}, 
+		 	</if>
+		 	<if test="sales_location != 0">
+		 		sales_location=#{sales_location}, 
+		 	</if>
+		 	<if test="sales_date != 0">
+		 		sales_type = #{sales_type}
+		 	</if>
+		 </set>
+		 where sales_id = #{sales_id}
 	</update>
 </mapper>
