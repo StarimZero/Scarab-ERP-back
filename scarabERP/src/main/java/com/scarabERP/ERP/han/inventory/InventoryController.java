@@ -30,9 +30,6 @@ public class InventoryController {
 	@GetMapping("/listByWarehouse/{warehouse}")
 	public HashMap<String, Object> listByWarehouse(QueryVO vo,
 			@PathVariable("warehouse") int warehouse_id){
-		System.out.println("검색어는!!!!!!!!!!!!!!" + vo);
-		String key = vo.getKey();
-		System.out.println("검색키워드는!!!!!!!!!!!!" + key);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("count", dao.listByWarehouseCount(vo, warehouse_id));
 		map.put("documents", dao.listByWarehouse(vo, warehouse_id));
@@ -59,7 +56,6 @@ public class InventoryController {
 	
 	@GetMapping("/restqnt/{item}")
 	public List<InventoryVO> restqnt(@PathVariable("item") String items_id){
-		System.out.println("받은 데이터는~~~~" + items_id);
 		return dao.restqnt(items_id);
 	}
 }

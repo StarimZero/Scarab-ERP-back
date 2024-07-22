@@ -71,7 +71,7 @@
 	
 	<select id="listRecent" resultType="com.scarabERP.ERP.han.inventory.TradeVO"> 
 		select * from trade_view where item=#{item}
-		<if test="warehouse!=null">
+		<if test="warehouse!=0">
 			and warehouse=#{warehouse}
 		</if>
 
