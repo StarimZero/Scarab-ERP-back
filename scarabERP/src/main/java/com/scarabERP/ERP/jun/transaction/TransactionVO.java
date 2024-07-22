@@ -3,9 +3,10 @@ package com.scarabERP.ERP.jun.transaction;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.scarabERP.ERP.starim.purchase.PurchaseVO;
 
 
-public class TransactionVO {
+public class TransactionVO extends PurchaseVO{
 	private int transaction_id;
 	private String account_number;
 	private int transaction_deposit;
@@ -20,13 +21,15 @@ public class TransactionVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public String toString() {
 		return "TransactionVO [transaction_id=" + transaction_id + ", account_number=" + account_number
 				+ ", transaction_deposit=" + transaction_deposit + ", transaction_withdraw=" + transaction_withdraw
 				+ ", transaction_date=" + transaction_date + ", member_info_key=" + member_info_key + ", client_id="
-				+ client_id + ", vendor_id=" + vendor_id + "]";
+				+ client_id + ", vendor_id=" + vendor_id + ", getPurchase_id()=" + getPurchase_id()
+				+ ", getPurchase_type()=" + getPurchase_type() + ", getSales_id()=" + getSales_id()
+				+ ", getSales_type()=" + getSales_type() + "]";
 	}
 
 	public int getTransaction_id() {
@@ -38,14 +41,14 @@ public class TransactionVO {
 	public int getTransaction_deposit() {
 		return transaction_deposit;
 	}
-	public void setTransaction_deposit(int transaction_deposit) {
-		this.transaction_deposit = transaction_deposit;
+	public void setTransaction_deposit(String transaction_deposit) {
+		this.transaction_deposit = Integer.parseInt(transaction_deposit);
 	}
 	public int getTransaction_withdraw() {
 		return transaction_withdraw;
 	}
-	public void setTransaction_withdraw(int transaction_withdraw) {
-		this.transaction_withdraw = transaction_withdraw;
+	public void setTransaction_withdraw(String transaction_withdraw) {
+		this.transaction_withdraw = Integer.parseInt(transaction_withdraw);
 	}
 	public Date getTransaction_date() {
 		return transaction_date;
@@ -68,13 +71,13 @@ public class TransactionVO {
 	public int getClient_id() {
 		return client_id;
 	}
-	public void setClient_id(int client_id) {
-		this.client_id = client_id;
+	public void setClient_id(String client_id) {
+		this.client_id = Integer.parseInt(client_id);
 	}
 	public int getVendor_id() {
 		return vendor_id;
 	}
-	public void setVendor_id(int vendor_id) {
-		this.vendor_id = vendor_id;
+	public void setVendor_id(String vendor_id) {
+		this.vendor_id = Integer.parseInt(vendor_id);
 	}
 }

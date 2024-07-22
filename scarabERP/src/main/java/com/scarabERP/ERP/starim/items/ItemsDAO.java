@@ -3,7 +3,6 @@ package com.scarabERP.ERP.starim.items;
 import java.util.List;
 
 import com.scarabERP.ERP.common.QueryVO;
-import com.scarabERP.ERP.starim.warehouse.WareHouseVO;
 
 public interface ItemsDAO {
 	//아이템 목록페이지네이션

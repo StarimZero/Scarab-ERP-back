@@ -7,7 +7,7 @@ public class InventoryVO {
 	private String items_name;
 	private String items_photo;
 	private int items_type;
-	private BigDecimal rest_qnt;
+	private int rest_qnt;
 	private int warehouse_id;
 	private String warehouse_name;
 	private String warehouse_address;
@@ -37,10 +37,10 @@ public class InventoryVO {
 	public void setItems_type(int items_type) {
 		this.items_type = items_type;
 	}
-	public BigDecimal getRest_qnt() {
+	public int getRest_qnt() {
 		return rest_qnt;
 	}
-	public void setRest_qnt(BigDecimal rest_qnt) {
+	public void setRest_qnt(int rest_qnt) {
 		this.rest_qnt = rest_qnt;
 	}
 	public int getWarehouse_id() {

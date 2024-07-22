@@ -2,12 +2,25 @@ package com.scarabERP.ERP.starim.purchase;
 
 import java.util.Date;
 
-public class PurchaseVO {
+import com.scarabERP.ERP.starim.sales.SalesVO;
+
+public class PurchaseVO extends SalesVO{
 	
 	private String purchase_id;
 	private String purchase_employee;
 	private int purchase_location;
 	private Date purchase_date;
+	private String member_info_name;
+	private int purchase_type;
+	
+	
+	
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
+	}
 	public String getPurchase_id() {
 		return purchase_id;
 	}
@@ -32,15 +45,17 @@ public class PurchaseVO {
 	public void setPurchase_date(Date purchase_date) {
 		this.purchase_date = purchase_date;
 	}
+	public int getPurchase_type() {
+		return purchase_type;
+	}
+	public void setPurchase_type(int purchase_type) {
+		this.purchase_type = purchase_type;
+	}
 	@Override
 	public String toString() {
 		return "PurchaseVO [purchase_id=" + purchase_id + ", purchase_employee=" + purchase_employee
-				+ ", purchase_location=" + purchase_location + ", purchase_date=" + purchase_date + "]";
+				+ ", purchase_location=" + purchase_location + ", purchase_date=" + purchase_date
+				+ ", member_info_name=" + member_info_name + ", purchase_type=" + purchase_type + "]";
 	}
-	
-	
-	
-	
-	
 
 }

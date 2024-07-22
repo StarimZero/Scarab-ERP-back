@@ -9,11 +9,18 @@ public class SalesVO {
 	private String sales_employee;
 	private String sales_location;
 	private String sales_date;
-
+	private String member_info_name;
+	private int sales_type;
 	
 	
 	
 
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
+	}
 	public String getSales_id() {
 		return sales_id;
 	}
@@ -37,6 +44,12 @@ public class SalesVO {
 	}
 	public void setSales_date(String sales_date) {
 		this.sales_date = sales_date;
+	}
+	public int getSales_type() {
+		return sales_type;
+	}
+	public void setSales_type(int sales_type) {
+		this.sales_type = sales_type;
 	}
 	@Override
 	public String toString() {

@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.WebUtils;
 
 import com.scarabERP.ERP.common.QueryVO;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/erp/notice")
@@ -39,9 +44,19 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/{notice_id}") //테스트 http://localhost:8080/bbs/114
-	public NoticeVO read(@PathVariable("notice_id") int notice_id) {
-		return service.read(notice_id);
+	public NoticeVO read(@PathVariable("notice_id") int notice_id, HttpServletRequest request, HttpServletResponse response) {
+		Cookie cookie = WebUtils.getCookie(request, "notice_id");
+		if(cookie == null) {
+	        cookie = new Cookie("notice_id", String.valueOf(notice_id));
+	        cookie.setPath("/");
+	        cookie.setMaxAge(60 * 60);
+	        response.addCookie(cookie);
+	        return service.read(notice_id);
+		}else {
+	        return dao.read(notice_id);
+	    }
 	}
+
 	
 	@DeleteMapping("/{notice_id}")
 	public void delete(@PathVariable("notice_id") int notice_id) {
