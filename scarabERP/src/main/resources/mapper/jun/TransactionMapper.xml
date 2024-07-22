@@ -2,11 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scarabERP.ERP.mapper.jun.TransactionMapper">
 	<insert id="insert">
-		INSERT INTO erp_account(account_number, transaction_deposit, 
-		transaction_withdraw, member_info_key, client_id, vendor_id)
-		VALUES(#{account_number}, #{transaction_deposit}, #{transaction_withdraw}, 
-		#{member_info_key}, #{client_id}, #{vendor_id})
+	    INSERT INTO erp_transaction (
+	        account_number, 
+	        transaction_deposit, 
+	        transaction_withdraw 
+	        <if test="member_info_key != 0">, member_info_key</if>
+	        <if test="client_id != 0">, client_id</if>
+	        <if test="vendor_id != 0">, vendor_id</if>
+	    ) VALUES (
+	        #{account_number}, 
+	        #{transaction_deposit}, 
+	        #{transaction_withdraw}
+	        <if test="member_info_key != 0">, #{member_info_key}</if>
+	        <if test="client_id != 0">, #{client_id}</if>
+	        <if test="vendor_id != 0">, #{vendor_id}</if>
+	    )
 	</insert>
+
 	
 	<select id="list" resultType="com.scarabERP.ERP.jun.transaction.TransactionVO">
 		SELECT * FROM erp_transaction 

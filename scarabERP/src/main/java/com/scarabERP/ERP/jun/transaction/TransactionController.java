@@ -38,8 +38,6 @@ public class TransactionController {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("list", dao.list(query, vo));
 		map.put("total", dao.total(query, vo));
-		System.out.println(query);
-		System.out.println(vo.toString());
 		return map;
 	}
 	
@@ -50,6 +48,7 @@ public class TransactionController {
 	
 	@PostMapping("")
 	public void insert(@RequestBody TransactionVO vo) {
+		System.out.println(vo.toString());
 		service.insert(vo);
 	}
 }
