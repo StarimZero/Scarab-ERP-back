@@ -9,6 +9,14 @@ public class BBSVO {
 	private String bbs_content;
 	private LocalTime bbs_regDate;
 	private String bbs_category;
+	private int bbs_viewcnt;
+	
+	public int getBbs_viewcnt() {
+		return bbs_viewcnt;
+	}
+	public void setBbs_viewcnt(int bbs_viewcnt) {
+		this.bbs_viewcnt = bbs_viewcnt;
+	}
 	public int getBbs_id() {
 		return bbs_id;
 	}
@@ -48,7 +56,8 @@ public class BBSVO {
 	@Override
 	public String toString() {
 		return "BBSVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", bbs_writer=" + bbs_writer + ", bbs_content="
-				+ bbs_content + ", bbs_regDate=" + bbs_regDate + ", bbs_category=" + bbs_category + "]";
+				+ bbs_content + ", bbs_regDate=" + bbs_regDate + ", bbs_category=" + bbs_category + ", bbs_viewcnt="
+				+ bbs_viewcnt + "]";
 	}
 	
 }
