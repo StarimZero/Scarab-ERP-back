@@ -1,5 +1,6 @@
 package com.scarabERP.ERP.jun.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,15 +16,21 @@ public class MemberDAOImpl implements MemberDAO{
 	String namespace = "com.scarabERP.ERP.mapper.jun.MemberMapper";
 	
 	@Override
-	public List<MemberVO> list(QueryVO vo) {
+	public List<MemberVO> list(QueryVO query, MemberVO vo) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list", vo);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("query", query);
+		map.put("vo", vo);
+		return session.selectList(namespace + ".list", map);
 	}
 
 	@Override
-	public int total(QueryVO vo) {
+	public int total(QueryVO query, MemberVO vo) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".total", vo);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("query", query);
+		map.put("vo", vo);
+		return session.selectOne(namespace + ".total", map);
 	}
 	
 	@Override
