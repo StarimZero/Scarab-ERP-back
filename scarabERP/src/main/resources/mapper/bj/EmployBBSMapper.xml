@@ -5,9 +5,8 @@
 	 <select id="list" resultType="hashmap">
 	 	select * from employ_bbs_view
 	 	<where>
-		 	<if test="key=='employ_bbs_admin'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
-		 	<if test="key=='employ_bbs_title'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
-			<if test="key=='employ_bbs_contents'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
+		 	<if test="key=='employ_bbs_title'">employ_bbs_title like #{word}</if>
+			<if test="key=='employ_bbs_contents'">employ_bbs_contents like #{word}</if>
 		</where>
 		order by employ_bbs_id desc
 		limit #{start}, #{size} ;
@@ -22,9 +21,8 @@
  		select count(*)
  		from employ_bbs_view
  		<where>
-		 	<if test="key=='employ_bbs_admin'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
-		 	<if test="key=='employ_bbs_title'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
-			<if test="key=='employ_bbs_contents'">employ_bbs_admin like #{word} or employ_bbs_type=1</if>
+		 	<if test="key=='employ_bbs_title'">employ_bbs_title like #{word}</if>
+			<if test="key=='employ_bbs_contents'">employ_bbs_contents like #{word}</if>
 		</where>
  	 </select>
  	
