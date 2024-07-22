@@ -10,6 +10,12 @@
        		LIMIT #{query.start}, #{query.size};
 		</select>
 		
+	<select id="total" resultType="int">
+       select count(*)
+       from erp_send_message m, erp_member_info u 
+	   where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=0
+    </select>
+		
 	 <insert id="insert">
 	 	insert into erp_send_message(message_sender, message_receiver, message_content, message_title)
 	 	values(#{message_sender}, #{message_receiver}, #{message_content}, #{message_title});
@@ -43,13 +49,13 @@
         ORDER BY message_id DESC
         LIMIT #{query.start}, #{query.size}
     </select>
-
-
-    <select id="total" resultType="int">
-        select count(*) 
-       from erp_send_message
-		
+    
+    <select id="dtotal" resultType="int">
+       select count(*)
+       from erp_send_message m, erp_member_info u 
+	   where message_sender = #{message_sender} and u.member_info_id=m.message_sender and message_state=1
     </select>
+
     
     
      <update id="resetState">

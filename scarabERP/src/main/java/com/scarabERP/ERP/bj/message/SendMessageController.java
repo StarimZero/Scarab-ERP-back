@@ -4,9 +4,11 @@ import java.util.HashMap;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +33,7 @@ public class SendMessageController {
 	@GetMapping("/list/{message_sender}") // erp/sendmessage/list/red
 	public HashMap<String, Object> list(QueryVO vo, @PathVariable("message_sender") String message_sender) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
+		map.put("total", dao.total(message_sender));
 		map.put("list", dao.list(vo, message_sender));
 		return map;
 	}
@@ -39,18 +41,18 @@ public class SendMessageController {
 	@GetMapping("/deletelist/{message_sender}")
 	public HashMap<String, Object> deletelist(QueryVO vo, @PathVariable("message_sender") String message_sender) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
+		map.put("dtotal", dao.dtotal(message_sender));
 		map.put("deleteList", dao.deleteList(vo, message_sender));
 		return map;
 	}
 	
 	
-	@PostMapping("/delete/{message_id}")
+	@DeleteMapping("/delete/{message_id}")
 	public void delete(@PathVariable("message_id") int message_id) {
 		dao.delete(message_id);
 	}
 	
-	@PostMapping("/update/send/state/{message_id}")
+	@PutMapping("/update/send/state/{message_id}")
 	public void updateSendState(@PathVariable("message_id") int message_id) {
 		dao.updateSendState(message_id);
 	}
@@ -61,7 +63,7 @@ public class SendMessageController {
 	}
 	
 
-	@PostMapping("/reset/state/{message_id}")
+	@PutMapping("/reset/state/{message_id}")
 	public void resetState(@PathVariable("message_id") int message_id) {
 		dao.resetState(message_id);
 		
