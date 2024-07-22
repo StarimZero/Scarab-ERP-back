@@ -5,8 +5,8 @@ import java.util.List;
 import com.scarabERP.ERP.common.QueryVO;
 
 public interface MemberDAO {
-	public List<MemberVO> list(QueryVO vo);
-	public int total(QueryVO vo);
+	public List<MemberVO> list(QueryVO query, MemberVO vo);
+	public int total(QueryVO query, MemberVO vo);
 	public String getERPMemberKey();
 	public void insert(MemberVO vo);
 	public MemberVO read(String member_info_id);

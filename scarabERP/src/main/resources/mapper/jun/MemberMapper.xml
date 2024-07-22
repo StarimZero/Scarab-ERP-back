@@ -4,37 +4,40 @@
 	<select id="list" resultType="com.scarabERP.ERP.jun.member.MemberVO">
 		SELECT m.*, d.dept_name
 		FROM erp_member_info m
-		INNER JOIN erp_dept d ON m.dept_key = d.dept_key
-		<if test="key == 'member_info_key'">
-			WHERE member_info_key like #{word}
-		</if>
-		<if test="key == 'member_info_id'">
-			WHERE member_info_id like #{word}
-		</if>
-		<if test="key == 'member_info_name'">
-			WHERE member_info_name like #{word}
-		</if>
-		<if test="key == 'dept_key'">
-			WHERE dept_key like #{word}
-		</if>
+		LEFT JOIN erp_dept d ON m.dept_key = d.dept_key
+		<where>
+			<if test="query.key == 'member_info_key'">
+				member_info_key like #{query.word}
+			</if>
+			<if test="query.key == 'member_info_name'">
+				member_info_name like #{query.word}
+			</if>
+			<if test="query.key == 'dept_key'">
+				m.dept_key like #{query.word}
+			</if>
+			<if test="query.key == 'member_info_hiredate'">
+				member_info_hiredate = #{vo.member_info_hiredate}
+			</if>
+		</where>
 		ORDER BY member_info_hiredate desc
-		limit #{start}, #{size}
+		limit #{query.start}, #{query.size}
 	</select>
 	
 	<select id="total" resultType="int">
 		SELECT count(*) total 
-		FROM erp_member_info 
-		<if test="key == 'member_info_key'">
-			WHERE member_info_key like #{word}
+		FROM erp_member_info m
+		LEFT JOIN erp_dept d ON m.dept_key = d.dept_key
+		<if test="query.key == 'member_info_key'">
+			WHERE member_info_key like #{query.word}
 		</if>
-		<if test="key == 'member_info_id'">
-			WHERE member_info_id like #{word}
+		<if test="query.key == 'member_info_name'">
+			WHERE member_info_name like #{query.word}
 		</if>
-		<if test="key == 'member_info_name'">
-			WHERE member_info_name like #{word}
+		<if test="query.key == 'dept_key'">
+			WHERE m.dept_key like #{query.word}
 		</if>
-		<if test="key == 'dept_key'">
-			WHERE dept_key like #{word}
+		<if test="query.key == 'member_info_hiredate'">
+			WHERE member_info_hiredate = #{vo.member_info_hiredate}
 		</if>
 	</select>
 	

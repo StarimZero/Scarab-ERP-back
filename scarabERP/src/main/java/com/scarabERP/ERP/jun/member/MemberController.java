@@ -1,11 +1,16 @@
 package com.scarabERP.ERP.jun.member;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,11 +30,18 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+	
 	@GetMapping("")
-	public HashMap<String, Object> list(QueryVO vo) {
+	public HashMap<String, Object> list(QueryVO query, MemberVO vo) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
-		map.put("list", dao.list(vo));
+		map.put("list", dao.list(query, vo));
+		map.put("total", dao.total(query, vo));
 		return map;
 	}
 	
