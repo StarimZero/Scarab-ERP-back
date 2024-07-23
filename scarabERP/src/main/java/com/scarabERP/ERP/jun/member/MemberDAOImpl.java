@@ -1,5 +1,6 @@
 package com.scarabERP.ERP.jun.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,15 +16,21 @@ public class MemberDAOImpl implements MemberDAO{
 	String namespace = "com.scarabERP.ERP.mapper.jun.MemberMapper";
 	
 	@Override
-	public List<MemberVO> list(QueryVO vo) {
+	public List<MemberVO> list(QueryVO query, MemberVO vo) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list", vo);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("query", query);
+		map.put("vo", vo);
+		return session.selectList(namespace + ".list", map);
 	}
 
 	@Override
-	public int total(QueryVO vo) {
+	public int total(QueryVO query, MemberVO vo) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".total", vo);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("query", query);
+		map.put("vo", vo);
+		return session.selectOne(namespace + ".total", map);
 	}
 	
 	@Override
@@ -47,31 +54,25 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void updateInfo(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_info", vo);
+		session.update(namespace + ".updateInfo", vo);
 	}
 
 	@Override
+	public void updatePhoto(MemberVO vo) {
+		// TODO Auto-generated method stub
+		session.update(namespace + ".updatePhoto", vo);
+	}
+	
+	@Override
 	public void updateLogin(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_login", vo);
+		session.update(namespace + ".updateLogin", vo);
 	}
 	
 	@Override
-	public void updateDept(MemberVO vo) {
+	public void updateERP(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_dept", vo);
-	}
-	
-	@Override
-	public void updateJob(MemberVO vo) {
-		// TODO Auto-generated method stub
-		session.update(namespace + ".update_job", vo);
-	}
-	
-	@Override
-	public void updateAuth(MemberVO vo) {
-		// TODO Auto-generated method stub
-		session.update(namespace + ".update_auth", vo);
+		session.update(namespace + ".updateERP", vo);
 	}
 
 	@Override
@@ -79,5 +80,4 @@ public class MemberDAOImpl implements MemberDAO{
 		// TODO Auto-generated method stub
 		session.delete(member_info_key);
 	}
-
 }

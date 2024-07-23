@@ -17,7 +17,8 @@ public interface ReceiveMessageDAO {
 	public void updateReadDate(int message_id);
 	public MessageVO readReceive(int message_id);
 	public List<HashMap<String,Object>> deleteList(QueryVO vo, String message_receiver);
-	public int total(QueryVO vo);
+	public int total(String message_receiver);
+	public int dtotal(String message_receiver);
 	public void resetState(int message_id);
 }
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException;
 import com.scarabERP.ERP.common.QueryVO;
 
 @RestController
@@ -47,7 +48,7 @@ public class TransactionController {
 	}
 	
 	@PostMapping("")
-	public void insert(@RequestBody TransactionVO vo) {
+	public void insert(@RequestBody TransactionVO vo) throws MySQLTransactionRollbackException {
 		System.out.println(vo.toString());
 		service.insert(vo);
 	}

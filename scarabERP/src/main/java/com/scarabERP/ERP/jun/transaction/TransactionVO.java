@@ -15,6 +15,7 @@ public class TransactionVO extends PurchaseVO{
 	private String member_info_key;
 	private int client_id;
 	private int vendor_id;
+	private String member_info_name;
 	
 	
 	public TransactionVO() {
@@ -79,5 +80,12 @@ public class TransactionVO extends PurchaseVO{
 	}
 	public void setVendor_id(String vendor_id) {
 		this.vendor_id = Integer.parseInt(vendor_id);
+	}
+
+	public String getMember_info_name() {
+		return member_info_name;
+	}
+	public void setMember_info_name(String member_info_name) {
+		this.member_info_name = member_info_name;
 	}
 }
