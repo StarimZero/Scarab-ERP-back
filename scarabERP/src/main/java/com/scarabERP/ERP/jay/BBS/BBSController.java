@@ -31,6 +31,7 @@ public class BBSController {
 	}
 	@GetMapping("/read/{bbs_id}")
 	public BBSVO read(@PathVariable("bbs_id") int bbs_id) {
+		System.out.println(bbs_id);
 		return dao.read(bbs_id);
 	}
 	
