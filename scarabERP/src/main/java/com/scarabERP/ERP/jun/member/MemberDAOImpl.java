@@ -54,31 +54,25 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void updateInfo(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_info", vo);
+		session.update(namespace + ".updateInfo", vo);
 	}
 
 	@Override
+	public void updatePhoto(MemberVO vo) {
+		// TODO Auto-generated method stub
+		session.update(namespace + ".updatePhoto", vo);
+	}
+	
+	@Override
 	public void updateLogin(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_login", vo);
+		session.update(namespace + ".updateLogin", vo);
 	}
 	
 	@Override
-	public void updateDept(MemberVO vo) {
+	public void updateERP(MemberVO vo) {
 		// TODO Auto-generated method stub
-		session.update(namespace + ".update_dept", vo);
-	}
-	
-	@Override
-	public void updateJob(MemberVO vo) {
-		// TODO Auto-generated method stub
-		session.update(namespace + ".update_job", vo);
-	}
-	
-	@Override
-	public void updateAuth(MemberVO vo) {
-		// TODO Auto-generated method stub
-		session.update(namespace + ".update_auth", vo);
+		session.update(namespace + ".updateERP", vo);
 	}
 
 	@Override
@@ -86,5 +80,4 @@ public class MemberDAOImpl implements MemberDAO{
 		// TODO Auto-generated method stub
 		session.delete(member_info_key);
 	}
-
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.scarabERP.ERP.jun.account.AccountDAO;
+import com.scarabERP.ERP.jun.salary.SalaryDAO;
+import com.scarabERP.ERP.jun.salary.SalaryVO;
 import com.scarabERP.ERP.starim.purchase.PurchaseDAO;
 import com.scarabERP.ERP.starim.purchase.PurchaseVO;
 import com.scarabERP.ERP.starim.sales.SalesDAO;
@@ -24,6 +26,9 @@ public class TransactionServiceImpl implements TransactionService {
     
     @Autowired
     SalesDAO sdao;
+    
+    @Autowired
+    SalaryDAO ldao;
 
     @Transactional
     @Override
@@ -54,6 +59,10 @@ public class TransactionServiceImpl implements TransactionService {
             pdao.update(purchase);
         } else {
             adao.updateTotal(account_number, account_total - vo.getTransaction_withdraw());
+            SalaryVO salary = new SalaryVO();
+            salary.setMember_info_key(vo.getMember_info_key());
+            salary.setMember_salary_money(vo.getTransaction_withdraw());
+            ldao.insert(salary);
         }
     }
 }
