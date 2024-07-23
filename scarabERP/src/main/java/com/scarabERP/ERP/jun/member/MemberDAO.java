@@ -12,8 +12,7 @@ public interface MemberDAO {
 	public MemberVO read(String member_info_id);
 	public void updateInfo(MemberVO vo);
 	public void updateLogin(MemberVO vo);
-	public void updateDept(MemberVO vo);
-	public void updateJob(MemberVO vo);
-	public void updateAuth(MemberVO vo);
+	public void updatePhoto(MemberVO vo);
+	public void updateERP(MemberVO vo);
 	public void delete(String member_info_key);
 }

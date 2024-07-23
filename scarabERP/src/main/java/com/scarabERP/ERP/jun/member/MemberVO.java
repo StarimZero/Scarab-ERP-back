@@ -21,6 +21,7 @@ public class MemberVO extends DeptVO {
 	private String member_info_account;
 	private String member_info_job;
 	private int member_info_salary;
+	private Date member_salary_date;
 	
 	public MemberVO() {
 		super();
@@ -121,5 +122,12 @@ public class MemberVO extends DeptVO {
 	}
 	public void setMember_info_salary(String member_info_salary) {
 		this.member_info_salary = Integer.parseInt(member_info_salary);
+	}
+	public Date getMember_salary_date() {
+		return member_salary_date;
+	}
+	public void setMember_salary_date(Date member_salary_date) {
+		this.member_salary_date = member_salary_date;
 	}	
+	
 }
