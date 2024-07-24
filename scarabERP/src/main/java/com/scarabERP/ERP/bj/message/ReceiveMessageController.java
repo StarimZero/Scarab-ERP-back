@@ -49,6 +49,15 @@ public class ReceiveMessageController {
 		map.put("deleteList", dao.deleteList(vo, message_receiver));
 		return map;
 	}
+	
+	@GetMapping("/nlist/{message_receiver}")
+	public HashMap<String, Object> nlist(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("ntotal", dao.ntotal(message_receiver));
+		map.put("nlist", dao.nlist(vo, message_receiver));
+		return map;
+	}
+	
     
     
 	
