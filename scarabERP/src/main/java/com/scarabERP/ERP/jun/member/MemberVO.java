@@ -20,12 +20,14 @@ public class MemberVO extends DeptVO {
 	private Date member_info_hiredate;
 	private String member_info_account;
 	private String member_info_job;
+	private int member_info_salary;
+	private Date member_salary_date;
 	
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MemberVO [member_info_key=" + member_info_key + ", member_info_id=" + member_info_id
@@ -34,7 +36,7 @@ public class MemberVO extends DeptVO {
 				+ ", member_info_address1=" + member_info_address1 + ", member_info_address2=" + member_info_address2
 				+ ", member_info_email=" + member_info_email + ", member_info_photo=" + member_info_photo
 				+ ", member_info_hiredate=" + member_info_hiredate + ", member_info_account=" + member_info_account
-				+ ", member_info_job=" + member_info_job + "]";
+				+ ", member_info_job=" + member_info_job + ", member_info_salary=" + member_info_salary + "]";
 	}
 
 	public String getMember_info_key() {
@@ -114,5 +116,18 @@ public class MemberVO extends DeptVO {
 	}
 	public void setMember_info_job(String member_info_job) {
 		this.member_info_job = member_info_job;
+	}
+	public int getMember_info_salary() {
+		return member_info_salary;
+	}
+	public void setMember_info_salary(String member_info_salary) {
+		this.member_info_salary = Integer.parseInt(member_info_salary);
+	}
+	public Date getMember_salary_date() {
+		return member_salary_date;
+	}
+	public void setMember_salary_date(Date member_salary_date) {
+		this.member_salary_date = member_salary_date;
 	}	
+	
 }

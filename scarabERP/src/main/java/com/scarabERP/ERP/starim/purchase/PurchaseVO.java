@@ -12,9 +12,17 @@ public class PurchaseVO extends SalesVO{
 	private Date purchase_date;
 	private String member_info_name;
 	private int purchase_type;
+	private String purchase_memo;
 	
 	
 	
+	
+	public String getPurchase_memo() {
+		return purchase_memo;
+	}
+	public void setPurchase_memo(String purchase_memo) {
+		this.purchase_memo = purchase_memo;
+	}
 	public String getMember_info_name() {
 		return member_info_name;
 	}

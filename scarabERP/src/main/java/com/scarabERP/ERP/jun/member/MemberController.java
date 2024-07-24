@@ -1,20 +1,28 @@
 package com.scarabERP.ERP.jun.member;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.scarabERP.ERP.common.QueryVO;
+import com.scarabERP.ERP.starim.items.ItemsVO;
 
 @RestController
 @RequestMapping("/erp/member")
@@ -25,11 +33,18 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+	
 	@GetMapping("")
-	public HashMap<String, Object> list(QueryVO vo) {
+	public HashMap<String, Object> list(QueryVO query, MemberVO vo) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
-		map.put("list", dao.list(vo));
+		map.put("list", dao.list(query, vo));
+		map.put("total", dao.total(query, vo));
 		return map;
 	}
 	
@@ -48,9 +63,9 @@ public class MemberController {
 		return dao.read(member_info_id);
 	}
 	
-	@PostMapping("/info/{member_info_key}")
-	public void updateInfo(@PathVariable("member_info_key") String member_info_key, @RequestBody MemberVO vo, MultipartHttpServletRequest multi) throws Exception {
-		service.updateInfo(member_info_key, vo, multi);
+	@PutMapping("")
+	public void updateInfo(@RequestBody MemberVO vo) {
+		dao.updateInfo(vo);
 	}
 	
 	@PutMapping("/login")
@@ -58,19 +73,43 @@ public class MemberController {
 		dao.updateLogin(vo);
 	}
 	
-	@PutMapping("/dept")
+	@PostMapping("/update/photo/{member_info_key}")
+	public void updatePhoto(@PathVariable("member_info_key") String member_info_key, MultipartHttpServletRequest multi) {
+		try {
+			String relativePath = "public/images/member/";
+			String currentDir = System.getProperty("user.dir");
+			String uploadPath = currentDir + File.separator + relativePath;
+
+			File folder = new File(uploadPath);
+			if (!folder.exists()) {
+				folder.mkdirs(); // 폴더가 없으면 모든 부모 디렉토리까지 생성
+			}
+			MultipartFile file = multi.getFile("byte");
+			if (file != null && !file.isEmpty()) {
+				String fileName = member_info_key + ".jpg";
+				File destFile = new File(uploadPath, fileName);
+				file.transferTo(destFile);
+				System.out.println("Uploaded file: " + fileName);
+				File oldFile = new File(destFile + fileName);
+				if(oldFile.exists()) {
+					oldFile.delete();
+				}
+				// 이미지 경로 설정 및 DB 삽입
+				MemberVO vo = new MemberVO();
+				vo.setMember_info_key(member_info_key);
+				vo.setMember_info_photo("/display?file=" + relativePath + fileName);
+				dao.updatePhoto(vo);
+			} else {
+				System.out.println("No file uploaded or file is empty");
+			}
+		} catch (Exception e) {
+			System.out.println("Attach 파일 업로드 오류: " + e.toString());
+		}
+	}
+	
+	@PutMapping("/erp")
 	public void updateDept(@RequestBody MemberVO vo) {
-		dao.updateDept(vo);
-	}
-	
-	@PutMapping("/job")
-	public void updateJob(@RequestBody MemberVO vo) {
-		dao.updateJob(vo);
-	}
-	
-	@PutMapping("/auth")
-	public void updateAuth(@RequestBody MemberVO vo) {
-		dao.updateAuth(vo);
+		dao.updateERP(vo);
 	}
 	
 	@DeleteMapping("")

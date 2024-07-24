@@ -63,15 +63,21 @@ public class SendMessageDAOImpl implements SendMessageDAO{
 
 
 	@Override
-	public int total(QueryVO vo) {
-		return session.selectOne(namespace + ".total", vo);
+	public int total(String message_sender) {
+		return session.selectOne(namespace + ".total", message_sender);
 	}
 
-
+ 
 	@Override
 	public void resetState(int message_id) {
 		session.update(namespace + ".resetState", message_id);
 		
+	}
+
+
+	@Override
+	public int dtotal(String message_sender) {
+		return session.selectOne(namespace + ".dtotal", message_sender);
 	}
 
 	

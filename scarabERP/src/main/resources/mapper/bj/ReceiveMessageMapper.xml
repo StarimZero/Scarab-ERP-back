@@ -9,12 +9,6 @@
 		<if test="key == 'message_content'">
           and m.message_content like #{word}
         </if>
-        <if test="key == 'message_receiver'">
-           and m.message_receiver like #{word}
-        </if>
-        <if test="key == 'message_sender'">
-           and m.message_sender like #{word}
-        </if>
         <if test="key == 'message_title'">
            and m.message_title like #{word}
         </if>
@@ -25,7 +19,22 @@
 	
 	  <select id="total" resultType="int">
          select count(*)
-     	from erp_receive_message
+     	from erp_receive_message m, erp_member_info u 
+		where m.message_receiver = #{message_receiver} and u.member_info_id=m.message_receiver and m.message_state=0
+   		 <if test="key == 'message_content'">
+          and m.message_content like #{word}
+        </if>
+        <if test="key == 'message_title'">
+           and m.message_title like #{word}
+        </if>
+
+    </select>
+    
+    
+	  <select id="dtotal" resultType="int">
+         select count(*)
+     	from erp_receive_message m, erp_member_info u 
+		where m.message_receiver = #{message_receiver} and u.member_info_id=m.message_receiver and m.message_state=1
    		 <if test="key == 'message_content'">
           and m.message_content like #{word}
         </if>
@@ -39,6 +48,24 @@
            and m.message_title like #{word}
         </if>
 
+    </select>
+    
+    <select id="nlist" resultType="int">
+    	select m.* ,u.member_info_id
+		from erp_receive_message m
+    	join erp_member_info u on u.member_info_id = m.message_receiver
+    	where m.message_receiver = #{message_receiver}
+      	and m.message_state = 0
+      	and m.message_readdate is null
+    </select>
+    
+      <select id="ntotal" resultType="int">
+         select count(*)
+     	 from erp_receive_message m
+	     join erp_member_info u on u.member_info_id = m.message_receiver
+	     where m.message_receiver = #{message_receiver}
+	     and m.message_state = 0
+	     and m.message_readdate is null
     </select>
 	
 	
@@ -82,10 +109,8 @@
         ORDER BY message_id DESC
         LIMIT #{query.start}, #{query.size};
     </select>
-
-
-  
     
+   
     <update id="resetState">
 		update erp_receive_message
 		set message_state=0
