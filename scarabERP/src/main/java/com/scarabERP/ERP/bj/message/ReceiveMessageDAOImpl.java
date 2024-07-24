@@ -90,6 +90,21 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 	}
 
 
+	@Override
+	public List<HashMap<String, Object>> nlist(QueryVO vo, String message_receiver) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("message_receiver", message_receiver);
+		map.put("query", vo);
+		return session.selectList(namespace + ".nlist", map);
+	}
+
+
+	@Override
+	public int ntotal(String message_receiver) {
+		return session.selectOne(namespace + ".ntotal", message_receiver);
+	}
+
+
 
 
 	

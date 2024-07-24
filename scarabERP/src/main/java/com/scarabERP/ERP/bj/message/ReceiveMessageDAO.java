@@ -20,5 +20,7 @@ public interface ReceiveMessageDAO {
 	public int total(String message_receiver);
 	public int dtotal(String message_receiver);
 	public void resetState(int message_id);
+	public List<HashMap<String,Object>> nlist(QueryVO vo, String message_receiver);
+	public int ntotal(String message_receiver);
 }
 
