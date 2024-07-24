@@ -38,4 +38,9 @@
 	 <select id="total" resultType="int">
 	 	select count(*) from BBS2
 	 </select>
+	 <update id="viewcntupdate">
+	 	update web_bbs
+	 	set bbs_viewcnt = bbs_viewcnt+1
+	 	where bbs_id=#{bbs_id}
+	 </update>
 </mapper>

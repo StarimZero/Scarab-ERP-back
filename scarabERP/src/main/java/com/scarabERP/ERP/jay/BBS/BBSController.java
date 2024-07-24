@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class BBSController {
 	
 	@Autowired
+	BBSService service;
+	
+	@Autowired
 	BBSDAO dao;
 	
 	@GetMapping("/list") 
@@ -31,21 +34,18 @@ public class BBSController {
 	}
 	@GetMapping("/read/{bbs_id}")
 	public BBSVO read(@PathVariable("bbs_id") int bbs_id) {
-		System.out.println(bbs_id);
-		return dao.read(bbs_id);
+
+		
+		return service.read(bbs_id);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/{bbs_id}")
 	public void update(@RequestBody BBSVO vo) {
-		dao.update(vo);
+		
+		dao.BBSupdate(vo);
 	}
 	
-	@PatchMapping("/update/{bbs_id}")
-	public void updateTitle(@PathVariable("bbs_id") int bbs_id, @RequestBody String title) {
-		BBSVO vo=dao.read(bbs_id);
-		vo.setBbs_title(title);
-		dao.update(vo);
-	}
+
 	@DeleteMapping("/delete/{bbs_id}")
 	public void delete(@PathVariable("bbs_id") int bbs_id) {
 		BBSVO vo=dao.read(bbs_id);

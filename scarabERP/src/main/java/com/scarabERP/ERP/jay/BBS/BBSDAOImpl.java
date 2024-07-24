@@ -32,7 +32,7 @@ public class BBSDAOImpl implements BBSDAO{
 	}
 
 	@Override
-	public void update(BBSVO vo) {
+	public void BBSupdate(BBSVO vo) {
 		session.update(namespace + ".BBSupdate", vo);
 		
 	}
@@ -55,4 +55,9 @@ public class BBSDAOImpl implements BBSDAO{
 		return session.selectOne(namespace + ".total");
 	}
 
+	@Override
+	public void viewcntupdate(int bbs_id) {
+		session.update(namespace + ".viewcntupdate", bbs_id);
+		
+	}
 }
