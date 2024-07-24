@@ -29,6 +29,7 @@
 	        <if test="query.key == 'member_info_hiredate'">
 	            member_info_hiredate = #{vo.member_info_hiredate}
 	        </if>
+	        AND member_info_job != '퇴사' 
 	        AND (s.member_salary_date IS NULL 
              OR DATE_FORMAT(s.member_salary_date, '%Y-%m') != DATE_FORMAT(NOW(), '%Y-%m'))
 	    </where>
@@ -54,6 +55,7 @@
 			<if test="query.key == 'member_info_hiredate'">
 				member_info_hiredate = #{vo.member_info_hiredate}
 			</if>
+			AND member_info_job != '퇴사' 
 			AND (s.member_salary_date IS NULL 
              OR DATE_FORMAT(s.member_salary_date, '%Y-%m') != DATE_FORMAT(NOW(), '%Y-%m'))
 		</where>
