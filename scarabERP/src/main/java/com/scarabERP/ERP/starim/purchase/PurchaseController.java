@@ -49,6 +49,4 @@ public class PurchaseController {
 	public void update(@RequestBody PurchaseVO vo) {
 		dao.update(vo);
 	}
-	
-
 }
