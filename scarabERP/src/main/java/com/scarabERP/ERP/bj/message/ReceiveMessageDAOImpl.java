@@ -73,8 +73,8 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 
 
 	@Override
-	public int total(QueryVO vo) {
-		return session.selectOne(namespace + ".total", vo);
+	public int total(String message_receiver) {
+		return session.selectOne(namespace + ".total", message_receiver);
 	}
 
 
@@ -82,6 +82,29 @@ public class ReceiveMessageDAOImpl implements ReceiveMessageDAO{
 	public void resetState(int message_id) {
 		session.update(namespace + ".resetState", message_id);
 	}
+
+
+	@Override
+	public int dtotal(String message_receiver) {
+		return session.selectOne(namespace + ".dtotal", message_receiver);
+	}
+
+
+	@Override
+	public List<HashMap<String, Object>> nlist(QueryVO vo, String message_receiver) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("message_receiver", message_receiver);
+		map.put("query", vo);
+		return session.selectList(namespace + ".nlist", map);
+	}
+
+
+	@Override
+	public int ntotal(String message_receiver) {
+		return session.selectOne(namespace + ".ntotal", message_receiver);
+	}
+
+
 
 
 	

@@ -1,7 +1,5 @@
 package com.scarabERP.ERP.han.inventory;
 
-import java.math.BigDecimal;
-
 public class InventoryVO {
 	private String items_id;
 	private String items_name;

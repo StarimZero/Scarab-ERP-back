@@ -60,5 +60,4 @@ public class BBSDAOImpl implements BBSDAO{
 		session.update(namespace + ".viewcntupdate", bbs_id);
 		
 	}
-
 }

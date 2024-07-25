@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +35,7 @@ public class ReceiveMessageController {
 	@GetMapping("/list/{message_receiver}") // erp/receivemessage/list/kiin?page=1&size=100
 	public HashMap<String, Object> list(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
+		map.put("total", dao.total(message_receiver));
 		map.put("list", dao.list(vo, message_receiver));
 		return map;
 	}
@@ -43,19 +45,28 @@ public class ReceiveMessageController {
 	@GetMapping("/deletelist/{message_receiver}")
 	public HashMap<String, Object> deletelist(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("total", dao.total(vo));
+		map.put("dtotal", dao.dtotal(message_receiver));
 		map.put("deleteList", dao.deleteList(vo, message_receiver));
 		return map;
 	}
+	
+	@GetMapping("/nlist/{message_receiver}")
+	public HashMap<String, Object> nlist(QueryVO vo, @PathVariable("message_receiver") String message_receiver) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("ntotal", dao.ntotal(message_receiver));
+		map.put("nlist", dao.nlist(vo, message_receiver));
+		return map;
+	}
+	
     
     
 	
-	@PostMapping("/delete/{message_id}")
+	@DeleteMapping("/delete/{message_id}")
 	public void delete(@PathVariable("message_id") int message_id) {
 		dao.delete(message_id);
 	}
 	
-	@PostMapping("/update/receive/state/{message_id}")
+	@PutMapping("/update/receive/state/{message_id}")
 	public void updateReceiveState(@PathVariable("message_id") int message_id ) {
 		dao.updateReceiveState(message_id);
 	}
@@ -65,12 +76,12 @@ public class ReceiveMessageController {
 		return dao.readReceive(message_id);
 	}
 	
-	@PostMapping("/update/readdate/{message_id}")
+	@PutMapping("/update/readdate/{message_id}")
 	public void updateReadDate(@PathVariable("message_id") int message_id) {
 		dao.updateReadDate(message_id);
 	}
 	
-	@PostMapping("/reset/state/{message_id}")
+	@PutMapping("/reset/state/{message_id}")
 	public void resetState(@PathVariable("message_id") int message_id) {
 		dao.resetState(message_id);
 	}

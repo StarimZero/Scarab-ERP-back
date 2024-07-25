@@ -3,6 +3,7 @@ package com.scarabERP.ERP.jun.transaction;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException;
 import com.scarabERP.ERP.common.QueryVO;
 
 @RestController
@@ -41,14 +43,23 @@ public class TransactionController {
 		return map;
 	}
 	
+	@GetMapping("/data")
+	public List<TransactionVO> data() {
+		return dao.data();
+	}
+	
+	@GetMapping("/selectData")
+	public List<TransactionVO> selectData(QueryVO query) {
+		return dao.selectData(query);
+	}
+	
 	@GetMapping("/{transaction_id}")
 	public HashMap<String, Object> read(@PathVariable("transaction_id") int transaction_id) {
 		return dao.read(transaction_id);
 	}
 	
 	@PostMapping("")
-	public void insert(@RequestBody TransactionVO vo) {
-		System.out.println(vo.toString());
+	public void insert(@RequestBody TransactionVO vo) throws MySQLTransactionRollbackException {
 		service.insert(vo);
 	}
 }
