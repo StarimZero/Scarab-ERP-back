@@ -44,7 +44,7 @@
 	 	delete from erp_sales where sales_id = #{sales_id}
 	 </delete>
 	 <update id="update">
-		update erp_sales 
+		update erp_sales
 		<set>
 			<if test="sales_date != null">
 		 		sales_date=#{sales_date}, 
