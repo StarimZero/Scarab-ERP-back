@@ -1,20 +1,26 @@
 package com.scarabERP.ERP.starim.sales;
 
-
-
+import java.util.Date;
 
 public class SalesVO {
 	
 	private String sales_id;
 	private String sales_employee;
 	private int sales_location;
-	private String sales_date;
+	private Date sales_date;
 	private String member_info_name;
 	private int sales_type;
+	private String sales_memo;
 	
 	
 	
 
+	public String getSales_memo() {
+		return sales_memo;
+	}
+	public void setSales_memo(String sales_memo) {
+		this.sales_memo = sales_memo;
+	}
 	public String getMember_info_name() {
 		return member_info_name;
 	}
@@ -39,10 +45,10 @@ public class SalesVO {
 	public void setSales_location(int sales_location) {
 		this.sales_location = sales_location;
 	}
-	public String getSales_date() {
+	public Date getSales_date() {
 		return sales_date;
 	}
-	public void setSales_date(String sales_date) {
+	public void setSales_date(Date sales_date) {
 		this.sales_date = sales_date;
 	}
 	public int getSales_type() {
