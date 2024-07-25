@@ -55,7 +55,7 @@
 		 	<if test="sales_location != 0">
 		 		sales_location=#{sales_location}, 
 		 	</if>
-		 	<if test="sales_date != 0">
+		 	<if test="sales_type != 0">
 		 		sales_type = #{sales_type}
 		 	</if>
 		 </set>

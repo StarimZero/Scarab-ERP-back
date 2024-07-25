@@ -19,7 +19,6 @@ class ScarabErpApplicationTests {
 		vo.setBbs_id(8);
 		vo.setBbs_title("이유닛 테스트");
 		vo.setBbs_content("업데이트 된 내용");
-
 		
 		
 	}
