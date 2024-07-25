@@ -1,5 +1,6 @@
 package com.scarabERP.ERP.jay.BBS;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,8 +28,8 @@ public class BBSDAOImpl implements BBSDAO{
 	}
 
 	@Override
-	public List<BBSVO> list() {
-		return session.selectList(namespace + ".list");
+	public List<HashMap<String,Object>> list(QueryVO vo) {
+		return session.selectList(namespace + ".list", vo);
 	}
 
 	@Override
@@ -43,16 +44,11 @@ public class BBSDAOImpl implements BBSDAO{
 		
 	}
 
-	@Override
-	public List<BBSVO> plist(QueryVO vo) {
-		
-		return session.selectList(namespace + ".plist", vo);
-	}
+
 
 	@Override
-	public int total() {
-		
-		return session.selectOne(namespace + ".total");
+	public int total(QueryVO vo) {
+		return session.selectOne(namespace + ".total", vo);
 	}
 
 	@Override
