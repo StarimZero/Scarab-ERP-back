@@ -34,6 +34,18 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 	
 	@Override
+	public List<TransactionVO> data() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".data");
+	}
+	
+	@Override
+	public List<TransactionVO> selectData(QueryVO query) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".selectData", query);
+	}
+	
+	@Override
 	public HashMap<String, Object> read(int transaction_id) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".read", transaction_id);

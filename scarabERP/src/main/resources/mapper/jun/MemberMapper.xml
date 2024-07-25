@@ -16,11 +16,14 @@
 			<if test="query.key == 'dept_key'">
 				m.dept_key like #{query.word}
 			</if>
+			<if test="query.key == 'member_info_job'">
+				member_info_job like #{query.word}
+			</if>
 			<if test="query.key == 'member_info_hiredate'">
 				member_info_hiredate = #{vo.member_info_hiredate}
 			</if>
 		</where>
-		ORDER BY member_info_hiredate desc
+		ORDER BY member_info_salary desc
 		limit #{query.start}, #{query.size}
 	</select>
 	
@@ -36,6 +39,9 @@
 		</if>
 		<if test="query.key == 'dept_key'">
 			WHERE m.dept_key like #{query.word}
+		</if>
+		<if test="query.key == 'member_info_job'">
+			WHERE member_info_job like #{query.word}
 		</if>
 		<if test="query.key == 'member_info_hiredate'">
 			WHERE member_info_hiredate = #{vo.member_info_hiredate}

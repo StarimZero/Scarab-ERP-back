@@ -7,7 +7,7 @@ public class SalesVO {
 	
 	private String sales_id;
 	private String sales_employee;
-	private String sales_location;
+	private int sales_location;
 	private String sales_date;
 	private String member_info_name;
 	private int sales_type;
@@ -33,10 +33,10 @@ public class SalesVO {
 	public void setSales_employee(String sales_employee) {
 		this.sales_employee = sales_employee;
 	}
-	public String getSales_location() {
+	public int getSales_location() {
 		return sales_location;
 	}
-	public void setSales_location(String sales_location) {
+	public void setSales_location(int sales_location) {
 		this.sales_location = sales_location;
 	}
 	public String getSales_date() {
