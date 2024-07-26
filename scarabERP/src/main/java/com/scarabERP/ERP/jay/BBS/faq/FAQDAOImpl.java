@@ -24,31 +24,31 @@ public class FAQDAOImpl implements FAQDAO{
 
 	@Override
 	public void insert(FAQVO vo) {
-		session.insert(namespace + "FAQinsert", vo);
+		session.insert(namespace + ".FAQinsert", vo);
 		
 	}
 
 	@Override
 	public void FAQupdate(FAQVO vo) {
-		// TODO Auto-generated method stub
+		session.update(namespace +".FAQupdate", vo);
 		
 	}
 
 	@Override
 	public void FAQdelete(int faq_id) {
-		// TODO Auto-generated method stub
+		session.delete(namespace + ".FAQdelete",faq_id);
 		
 	}
 
 	@Override
 	public int total(QueryVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return session.selectOne(namespace +".total", vo);
 	}
 
 	@Override
 	public void viewcntupdate(int faq_id) {
-		// TODO Auto-generated method stub
+		session.update(namespace +".FAQupdqte", faq_id);
 		
 	}
 

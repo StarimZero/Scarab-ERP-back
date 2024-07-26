@@ -47,7 +47,7 @@ public class BBSController {
 	}
 	
 
-	@DeleteMapping("/delete/{bbs_id}")
+	@DeleteMapping("/{bbs_id}")
 	public void delete(@PathVariable("bbs_id") int bbs_id) {
 		BBSVO vo=dao.read(bbs_id);
 		dao.delete(bbs_id);

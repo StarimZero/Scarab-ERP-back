@@ -4,7 +4,7 @@ public class FAQVO {
 	private int faq_id;
 	private String faq_contents;
 	private String faq_title;
-	private String faq_fegDate;
+	private String faq_regDate;
 	private int faq_type;
 	private int faq_viewcnt;
 	private String faq_admin;
@@ -27,11 +27,11 @@ public class FAQVO {
 	public void setFaq_title(String faq_title) {
 		this.faq_title = faq_title;
 	}
-	public String getFaq_fegDate() {
-		return faq_fegDate;
+	public String getFaq_regDate() {
+		return faq_regDate;
 	}
-	public void setFaq_fegDate(String faq_fegDate) {
-		this.faq_fegDate = faq_fegDate;
+	public void setFaq_regDate(String faq_regDate) {
+		this.faq_regDate = faq_regDate;
 	}
 	public int getFaq_type() {
 		return faq_type;
@@ -60,10 +60,15 @@ public class FAQVO {
 	@Override
 	public String toString() {
 		return "FAQVO [faq_id=" + faq_id + ", faq_contents=" + faq_contents + ", faq_title=" + faq_title
-				+ ", faq_fegDate=" + faq_fegDate + ", faq_type=" + faq_type + ", faq_viewcnt=" + faq_viewcnt
-				+ ", faq_admin=" + faq_admin + ", member_info_id=" + member_info_id + "]";
+				+ ", faq_regDate=" + faq_regDate + ", faq_type=" + faq_type + ", faq_viewcnt=" + faq_viewcnt
+				+ ", faq_admin=" + faq_admin + ", member_info_id=" + member_info_id + ", getFaq_id()=" + getFaq_id()
+				+ ", getFaq_contents()=" + getFaq_contents() + ", getFaq_title()=" + getFaq_title()
+				+ ", getFaq_regDate()=" + getFaq_regDate() + ", getFaq_type()=" + getFaq_type() + ", getFaq_viewcnt()="
+				+ getFaq_viewcnt() + ", getFaq_admin()=" + getFaq_admin() + ", getMember_info_id()="
+				+ getMember_info_id() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 	
 	
-
+	
 }
