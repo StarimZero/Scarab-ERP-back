@@ -22,5 +22,8 @@ public interface PurchaseDAO {
 	
 	//구매 수정
 	public void update(PurchaseVO vo);
+	
+	//개인별 물품 구매 불러오기
+	public List<PurchaseVO> viewList(QueryVO vo);
 
 }

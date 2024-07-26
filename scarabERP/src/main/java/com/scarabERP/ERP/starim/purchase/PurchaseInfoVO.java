@@ -1,6 +1,8 @@
 package com.scarabERP.ERP.starim.purchase;
 
-public class PurchaseInfoVO {
+import com.scarabERP.ERP.starim.sales.SalesVO;
+
+public class PurchaseInfoVO extends SalesVO{
 	
 	private int purchase_info_id;
     private String purchase_id;
