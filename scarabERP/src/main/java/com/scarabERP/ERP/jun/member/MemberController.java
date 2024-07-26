@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.scarabERP.ERP.common.QueryVO;
-import com.scarabERP.ERP.starim.items.ItemsVO;
 
 @RestController
 @RequestMapping("/erp/member")
@@ -32,6 +32,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService service;
+	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -50,6 +53,8 @@ public class MemberController {
 	
 	@PostMapping("")
 	public void insert(@RequestBody MemberVO vo) {
+		String member_info_pass =encoder.encode(vo.getMember_info_pass());
+		vo.setMember_info_pass(member_info_pass);
 		service.insert(vo);
 	}
 	
@@ -61,6 +66,20 @@ public class MemberController {
 	@GetMapping("/{member_info_id}")
 	public MemberVO read(@PathVariable("member_info_id") String member_info_id) {
 		return dao.read(member_info_id);
+	}
+	
+	@PostMapping("/login")
+	public int login(@RequestBody MemberVO vo) {
+		int result = 0;
+		MemberVO member = dao.read(vo.getMember_info_id());
+		if(member != null) {
+			if(encoder.matches(vo.getMember_info_pass(), member.getMember_info_pass())) {
+				result = 1;
+			}else {
+				result = 2;
+			}
+		}
+		return result;
 	}
 	
 	@PutMapping("")
