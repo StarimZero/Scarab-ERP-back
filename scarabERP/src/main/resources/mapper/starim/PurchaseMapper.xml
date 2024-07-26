@@ -59,5 +59,13 @@
 	    </set>
 	    WHERE purchase_id = #{purchase_id}
 	</update>
+	<select id="viewList" resultType="com.scarabERP.ERP.starim.purchase.PurchaseVO">
+	 	select * from view_pi
+	 	<where>
+			<if test="key=='purchase_employee'">
+				purchase_employee like #{word}
+			</if>
+		</where>
+	 </select>
 
 </mapper>

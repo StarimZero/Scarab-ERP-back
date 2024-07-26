@@ -48,5 +48,7 @@ public class PurchaseInfoController {
 	public void update(@RequestBody PurchaseInfoVO vo) {
 		dao.update(vo);
 	}
+	
+
 
 }

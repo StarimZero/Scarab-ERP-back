@@ -49,4 +49,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		return session.selectOne(namespace + ".total", vo);
 	}
 
+	@Override
+	public List<PurchaseVO> viewList(QueryVO vo) {
+		return session.selectList(namespace + ".viewList", vo);
+	}
+
 }

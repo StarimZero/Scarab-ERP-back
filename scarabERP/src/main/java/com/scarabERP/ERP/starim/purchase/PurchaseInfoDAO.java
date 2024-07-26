@@ -21,4 +21,6 @@ public interface PurchaseInfoDAO {
 	
 	//특정 구매 불러오기
 	public List<PurchaseInfoVO> read(String purchase_id);
+	
+
 }
