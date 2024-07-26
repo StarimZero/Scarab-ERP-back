@@ -37,8 +37,6 @@ public class BBSController {
 	}
 	@GetMapping("/read/{bbs_id}")
 	public BBSVO read(@PathVariable("bbs_id") int bbs_id) {
-
-		
 		return service.read(bbs_id);
 	}
 	

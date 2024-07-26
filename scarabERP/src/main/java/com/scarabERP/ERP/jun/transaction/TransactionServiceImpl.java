@@ -45,7 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
         int account_total = adao.read(account_number).getAccount_total();
         tdao.insert(vo);
         
-        if (vo.getTransaction_deposit() != 0) {
+        if (vo.getSales_id() != null) {
             adao.updateTotal(account_number, account_total + vo.getTransaction_deposit());
             SalesVO sales = new SalesVO();
             sales.setSales_id(vo.getSales_id());
