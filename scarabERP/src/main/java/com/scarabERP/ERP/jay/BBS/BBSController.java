@@ -1,18 +1,17 @@
 package com.scarabERP.ERP.jay.BBS;
 
-import java.util.HashMap;
-import java.util.List;
-
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.scarabERP.ERP.common.QueryVO;
 
 @RestController
 @RequestMapping("/bbs")
@@ -25,8 +24,12 @@ public class BBSController {
 	BBSDAO dao;
 	
 	@GetMapping("/list") 
-	public List<BBSVO> list(){
-		return dao.list();
+	public HashMap<String, Object> list(QueryVO vo){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", dao.total(vo));
+		map.put("list", dao.list(vo));
+		return map;
+		
 	}
 	@PostMapping("/insert")
 	public void insert(@RequestBody BBSVO vo) {
@@ -44,18 +47,11 @@ public class BBSController {
 	}
 	
 
-	@DeleteMapping("/delete/{bbs_id}")
+	@DeleteMapping("/{bbs_id}")
 	public void delete(@PathVariable("bbs_id") int bbs_id) {
 		BBSVO vo=dao.read(bbs_id);
 		dao.delete(bbs_id);
 	}
-	@GetMapping("/plist")
-	public HashMap<String, Object> plist(com.scarabERP.ERP.common.QueryVO vo){
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", dao.plist(vo));
-		map.put("total", dao.total());
-		return map;
-		
-	}
+
 	
 }
