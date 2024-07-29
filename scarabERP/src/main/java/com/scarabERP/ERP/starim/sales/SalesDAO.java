@@ -24,6 +24,13 @@ public interface SalesDAO {
 	//판매 수정하기
 	public void update(SalesVO vo);
 	
+	// 판매 대금 리스트
+	public List<SalesVO> transactionList(QueryVO vo);
+		
+	// 판매 대금 토탈
+	public int transactionTotal(QueryVO vo);
+
 	//개인별 판매
 	public List<SalesVO> viewList(QueryVO vo);
+
 }

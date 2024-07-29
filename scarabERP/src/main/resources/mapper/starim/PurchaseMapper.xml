@@ -31,6 +31,42 @@
 			where purchase_date like #{word}
 		</if>
 	</select>
+	
+	 <select id="transactionList" resultType="com.scarabERP.ERP.starim.purchase.PurchaseVO">
+	 	select * from view_purchase
+	 	<where>
+			<if test="key=='member_info_name'">
+				member_info_name like #{word}
+			</if>
+			<if test="key=='purchase_employee'">
+				purchase_employee like #{word}
+			</if>
+			<if test="key=='purchase_id'">
+				purchase_id like #{word}
+			</if>
+			<if test="key=='purchase_date'">
+				purchase_date like #{word}
+			</if>
+			AND purchase_type = 0
+		</where>
+		limit #{start}, #{size};
+	 </select>
+ 	<select id ="transactionTotal" resultType="int">
+ 		select count(*) from view_purchase
+ 		<where>
+	 		<if test="key=='member_info_name'">
+				member_info_name like #{word}
+			</if>
+			<if test="key=='purchase_employee'">
+				purchase_employee like #{word}
+			</if>
+			<if test="key=='purchase_date'">
+				purchase_date like #{word}
+			</if>
+			AND purchase_type = 0
+		</where>
+	</select>
+	
 	 <select id="getPurchaseID" resultType="string" statementType="CALLABLE">
 	 	{call getPurchaseId()}
 	 </select>

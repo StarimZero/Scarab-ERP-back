@@ -40,6 +40,14 @@ public class PurchaseController {
 		map.put("documents", dao.list(vo));
 		return map;
 	}
+
+	@GetMapping("/list")
+	public HashMap<String, Object> transactionList(QueryVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", dao.transactionTotal(vo));
+		map.put("documents", dao.transactionList(vo));
+		return map;
+	}
 	
 	@DeleteMapping("/{purchase_id}")
 	public void delete(@PathVariable("purchase_id") String purchase_id) {
