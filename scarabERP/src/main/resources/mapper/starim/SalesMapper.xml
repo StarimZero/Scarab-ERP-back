@@ -34,6 +34,45 @@
 			where sales_date like #{word}
 		</if>
 	</select>
+	
+	 <select id="transactionList" resultType="com.scarabERP.ERP.starim.sales.SalesVO">
+	 	select * from view_sales
+	 	<where>
+			<if test="key=='member_info_name'">
+				member_info_name like #{word} 
+			</if>
+			<if test="key=='sales_employee'">
+				sales_ like #{word} 
+			</if>
+			<if test="key=='sales_id'">
+				sales_id like #{word}
+			</if>
+			<if test="key=='sales_date'">
+				sales_date like #{word}
+			</if>
+			AND sales_type = 0
+		</where>
+		limit #{start}, #{size};
+	 </select>
+ 	<select id ="transactionTotal" resultType="int">
+ 		select count(*) from view_sales
+ 		<where>
+	 		<if test="key=='member_info_name'">
+				member_info_name like #{word}	
+			</if>
+			<if test="key=='sales_employee'">
+				sales_employee like #{word}
+			</if>
+			<if test="key=='sales_id'">
+				sales_id like #{word}
+			</if>
+			<if test="key=='sales_date'">
+				sales_date like #{word}
+			</if>
+			AND sales_type = 0
+		</where>
+	</select>
+	
 	 <select id="getSaleID" resultType="string" statementType="CALLABLE">
 	 	{call getSaleId()}
 	 </select>

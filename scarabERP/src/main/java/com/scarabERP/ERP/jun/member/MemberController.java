@@ -84,11 +84,15 @@ public class MemberController {
 	
 	@PutMapping("")
 	public void updateInfo(@RequestBody MemberVO vo) {
+		String member_info_pass =encoder.encode(vo.getMember_info_pass());
+		vo.setMember_info_pass(member_info_pass);
 		dao.updateInfo(vo);
 	}
 	
 	@PutMapping("/login")
 	public void updateLogin(@RequestBody MemberVO vo) {
+		String member_info_pass =encoder.encode(vo.getMember_info_pass());
+		vo.setMember_info_pass(member_info_pass);
 		dao.updateLogin(vo);
 	}
 	

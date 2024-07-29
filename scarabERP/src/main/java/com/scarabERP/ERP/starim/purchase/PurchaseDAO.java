@@ -25,5 +25,11 @@ public interface PurchaseDAO {
 	
 	//개인별 물품 구매 불러오기
 	public List<PurchaseVO> viewList(QueryVO vo);
+	
+	// 구매 대금 리스트
+	public List<PurchaseVO> transactionList(QueryVO vo);
+	
+	// 구매 대금 토탈
+	public int transactionTotal(QueryVO vo);
 
 }

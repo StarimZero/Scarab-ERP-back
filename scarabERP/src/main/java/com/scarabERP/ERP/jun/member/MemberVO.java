@@ -20,6 +20,7 @@ public class MemberVO extends DeptVO {
 	private Date member_info_hiredate;
 	private String member_info_account;
 	private String member_info_job;
+	private String member_info_auth;
 	private int member_info_salary;
 	private Date member_salary_date;
 	
@@ -116,6 +117,12 @@ public class MemberVO extends DeptVO {
 	}
 	public void setMember_info_job(String member_info_job) {
 		this.member_info_job = member_info_job;
+	}
+	public String getMember_info_auth() {
+		return member_info_auth;
+	}
+	public void setMember_info_auth(String member_info_auth) {
+		this.member_info_auth = member_info_auth;
 	}
 	public int getMember_info_salary() {
 		return member_info_salary;

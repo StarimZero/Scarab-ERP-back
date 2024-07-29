@@ -41,6 +41,14 @@ public class SalesController {
 		return map;
 	}
 	
+	@GetMapping("/list")
+	public HashMap<String, Object> transactionList(QueryVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("total", dao.transactionTotal(vo));
+		map.put("documents", dao.transactionList(vo));
+		return map;
+	}
+	
 	@DeleteMapping("/{sales_id}")
 	public void delete(@PathVariable("sales_id") String sales_id) {
 		dao.delete(sales_id);

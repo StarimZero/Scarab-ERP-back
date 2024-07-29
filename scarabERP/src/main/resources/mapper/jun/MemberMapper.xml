@@ -68,13 +68,14 @@
 		UPDATE erp_member_info SET 
 		dept_key = #{dept_key}, 
 		member_info_job = #{member_info_job},
+		member_info_auth = #{member_info_auth},
 		member_info_photo = #{member_info_photo}, 
 		member_info_phone = #{member_info_phone}, 
 		member_info_address1 = #{member_info_address1}, 
 		member_info_address2 = #{member_info_address2}, 
 		member_info_email = #{member_info_email}, 
 		member_info_account = #{member_info_account}, 
-		member_info_salary = #{member_info_salary} 
+		member_info_salary = #{member_info_salary}
 		WHERE member_info_key = #{member_info_key}
 	</update>
 	

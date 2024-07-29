@@ -48,4 +48,16 @@ public class SalesDAOImpl implements SalesDAO {
 		return session.selectOne(namespace + ".total", vo);
 	}
 
+	@Override
+	public List<SalesVO> transactionList(QueryVO vo) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".transactionList", vo);
+	}
+
+	@Override
+	public int transactionTotal(QueryVO vo) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".transactionTotal", vo);
+	}
+
 }
