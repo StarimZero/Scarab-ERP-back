@@ -3,6 +3,7 @@ package com.scarabERP.ERP.starim.sales;
 import java.util.List;
 
 import com.scarabERP.ERP.common.QueryVO;
+import com.scarabERP.ERP.starim.purchase.PurchaseVO;
 
 public interface SalesDAO {
 	//판매 아이디 들고오기
@@ -22,4 +23,7 @@ public interface SalesDAO {
 	
 	//판매 수정하기
 	public void update(SalesVO vo);
+	
+	//개인별 판매
+	public List<SalesVO> viewList(QueryVO vo);
 }

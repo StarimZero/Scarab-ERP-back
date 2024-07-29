@@ -2,7 +2,9 @@ package com.scarabERP.ERP.starim.sales;
 
 import java.util.Date;
 
-public class SalesVO {
+
+
+public class SalesVO extends SalesInfoVO{
 	
 	private String sales_id;
 	private String sales_employee;

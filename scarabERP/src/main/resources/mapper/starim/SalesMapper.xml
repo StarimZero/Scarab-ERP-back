@@ -8,7 +8,7 @@
 				member_info_name like #{word} 
 			</if>
 			<if test="key=='sales_employee'">
-				sales_ like #{word} 
+				sales_employee like #{word} 
 			</if>
 			<if test="key=='sales_id'">
 				sales_id like #{word}
@@ -61,4 +61,12 @@
 		 </set>
 		 where sales_id = #{sales_id}
 	</update>
+	<select id="viewList" resultType="com.scarabERP.ERP.starim.sales.SalesVO">
+	 	select * from view_sales_chart
+	 	<where>
+			<if test="key=='sales_employee'">
+				sales_employee like #{word}
+			</if>
+		</where>
+	 </select>
 </mapper>

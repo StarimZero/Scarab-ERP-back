@@ -48,4 +48,9 @@ public class SalesDAOImpl implements SalesDAO {
 		return session.selectOne(namespace + ".total", vo);
 	}
 
+	@Override
+	public List<SalesVO> viewList(QueryVO vo) {
+		return session.selectList(namespace + ".viewList", vo);
+	}
+
 }
