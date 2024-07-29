@@ -15,7 +15,7 @@ public interface ReceiveMessageDAO {
 	public void updateReceiveState(int message_id); // 휴지통으로 이동
 	public void delete(int message_id); // 휴지통에서 삭제
 	public void updateReadDate(int message_id); //읽은 시간 업데이트
-	public MessageVO readReceive(int message_id); // 읽은 시간
+	public MessageVO readReceive(int message_id); // 내용 읽기
 	public List<HashMap<String,Object>> deleteList(QueryVO vo, String message_receiver); //받은메세지 휴지통리스트
 	public int total(String message_receiver);//받은메세지 토탈
 	public int dtotal(String message_receiver);// 받은메세지 휴지통 토탈

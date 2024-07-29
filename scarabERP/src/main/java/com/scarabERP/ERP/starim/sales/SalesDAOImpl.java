@@ -58,6 +58,9 @@ public class SalesDAOImpl implements SalesDAO {
 	public int transactionTotal(QueryVO vo) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".transactionTotal", vo);
+
+	public List<SalesVO> viewList(QueryVO vo) {
+		return session.selectList(namespace + ".viewList", vo);
 	}
 
 }

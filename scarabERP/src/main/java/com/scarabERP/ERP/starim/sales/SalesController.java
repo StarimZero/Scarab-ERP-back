@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarabERP.ERP.common.QueryVO;
+import com.scarabERP.ERP.starim.purchase.PurchaseVO;
 
 @RestController
 @RequestMapping("/erp/sales")
@@ -57,6 +58,12 @@ public class SalesController {
 	@PutMapping
 	public void update(@RequestBody SalesVO vo) {
 		dao.update(vo);
+	}
+	
+	//뷰리스트불러오기	
+	@GetMapping("/view")
+	public List<SalesVO> viewList(QueryVO vo){
+		return dao.viewList(vo);
 	}
 	
 

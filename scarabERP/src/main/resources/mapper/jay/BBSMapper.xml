@@ -3,8 +3,8 @@
 <mapper namespace="com.scarabERP.ERP.jay.BBSMapper">
 	
 	<insert id="insertBBS" >
-		insert into web_bbs(bbs_id, bbs_title, bbs_writer, bbs_content, bbs_regDate, bbs_category)
-		values(#{bbs_id},#{bbs_title}, #{bbs_writer}, #{bbs_content}, #{bbs_regDate}, #{bbs_category})
+		insert into web_bbs(bbs_id, bbs_title, bbs_writer, bbs_content, bbs_category)
+		values(#{bbs_id},#{bbs_title}, #{bbs_writer}, #{bbs_content}, #{bbs_category})
 	</insert>
 		
 	<select id="list" resultType="com.scarabERP.ERP.jay.BBS.BBSVO">
