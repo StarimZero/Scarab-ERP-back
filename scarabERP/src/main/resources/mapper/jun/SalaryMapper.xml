@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="memberList" resultType="com.scarabERP.ERP.jun.member.MemberVO">
-	    SELECT m.*, d.dept_name, s.member_salary_date
+	    SELECT DISTINCT m.*, d.dept_name, s.member_salary_date
 	    FROM erp_member_info m
 	    LEFT JOIN erp_dept d ON m.dept_key = d.dept_key
 	    LEFT JOIN erp_member_salary s ON m.member_info_key = s.member_info_key
@@ -30,8 +30,9 @@
 	            member_info_hiredate = #{vo.member_info_hiredate}
 	        </if>
 	        AND member_info_job != '퇴사' 
-	        AND (s.member_salary_date IS NULL 
-             OR DATE_FORMAT(s.member_salary_date, '%Y-%m') != DATE_FORMAT(NOW(), '%Y-%m'))
+	        <if test="vo.member_salary_date != null">
+	        	AND DATE_FORMAT(s.member_salary_date, '%Y-%m') != DATE_FORMAT(NOW(), '%Y-%m'))
+	        </if>
 	    </where>
 	    ORDER BY member_info_hiredate DESC
 	    LIMIT #{query.start}, #{query.size}
