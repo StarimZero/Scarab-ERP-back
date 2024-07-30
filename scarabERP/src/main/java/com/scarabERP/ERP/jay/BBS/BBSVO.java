@@ -1,13 +1,14 @@
 package com.scarabERP.ERP.jay.BBS;
 
 import java.time.LocalTime;
+import java.util.Date;
 
 public class BBSVO {
 	private int bbs_id;
 	private String bbs_title;
 	private String bbs_writer;
 	private String bbs_content;
-	private LocalTime bbs_regDate;
+	private Date bbs_regDate;
 	private String bbs_category;
 	private int bbs_viewcnt;
 	
@@ -47,10 +48,10 @@ public class BBSVO {
 	public void setBbs_content(String bbs_content) {
 		this.bbs_content = bbs_content;
 	}
-	public LocalTime getBbs_regDate() {
+	public Date getBbs_regDate() {
 		return bbs_regDate;
 	}
-	public void setBbs_regDate(LocalTime bbs_regDate) {
+	public void setBbs_regDate(Date bbs_regDate) {
 		this.bbs_regDate = bbs_regDate;
 	}
 	@Override
