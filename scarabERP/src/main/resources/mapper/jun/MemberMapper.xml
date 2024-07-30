@@ -23,7 +23,7 @@
 				member_info_hiredate = #{vo.member_info_hiredate}
 			</if>
 		</where>
-		ORDER BY member_info_salary desc
+		ORDER BY member_info_key desc
 		limit #{query.start}, #{query.size}
 	</select>
 	

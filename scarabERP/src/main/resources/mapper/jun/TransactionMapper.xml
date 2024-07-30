@@ -21,9 +21,11 @@
 
 	
 	<select id="list" resultType="com.scarabERP.ERP.jun.transaction.TransactionVO">
-		SELECT t.*, m.member_info_name 
+		SELECT t.*, m.member_info_name, v.vendor_name, c.client_name 
 		FROM erp_transaction t
 		LEFT JOIN erp_member_info m ON t.member_info_key = m.member_info_key
+		LEFT JOIN view_vendor v ON t.vendor_id = v.vendor_id 
+		LEFT JOIN view_client c ON t.client_id = c.client_id 
 			WHERE account_number = #{vo.account_number}
 			<if test="query.key == 'member_info_key'">
 				AND member_info_key like #{query.word}
